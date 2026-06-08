@@ -5,10 +5,11 @@ import { PageHero } from '@/components/PageHero'
 import { FadeIn } from '@/components/FadeIn'
 import { ServiceCard } from '@/components/ServiceCard'
 import { ServiceModal } from '@/components/ServiceModal'
+import { useContent } from '@/hooks/useSiteContent'
 import type { ServicePageItem } from '@/data/servicesPage'
-import { servicesPage } from '@/data/servicesPage'
 
 export function ServicesPage() {
+  const { servicesPage } = useContent()
   const location = useLocation()
   const [selectedService, setSelectedService] = useState<ServicePageItem | null>(null)
 

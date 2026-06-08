@@ -7,19 +7,11 @@ import { RecentNewsCollage } from '@/components/RecentNewsCollage'
 import { ClientsMarquee } from '@/components/ClientsMarquee'
 import { ServicesScroll } from '@/components/ServicesScroll'
 import { VideoModal } from '@/components/VideoModal'
-import { stats } from '@/data/stats'
+import { useContent } from '@/hooks/useSiteContent'
 import { assetUrl } from '@/utils/assets'
 
-const whoWeAreBullets = [
-  '8 industrial kitchens',
-  '5 regions',
-  'Serving Oil & Gas, Mining, Aviation',
-  'Multi-ISO certified',
-  'Safety-first ethos',
-  '565+ employees',
-]
-
 export function HomePage() {
+  const { home: homeContent, stats } = useContent()
   useAnimatedCounter()
   const [videoOpen, setVideoOpen] = useState(false)
   const previewVideoRef = useRef<HTMLVideoElement>(null)
@@ -60,13 +52,13 @@ export function HomePage() {
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto flex flex-col items-center mb-6 sm:mb-8 lg:mb-10">
           <FadeIn>
             <h1 className="hero-heading text-3xl min-[480px]:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.15] tracking-tight mb-4 sm:mb-5 lg:mb-6">
-              Focus on your core business.
+              {homeContent.hero.titleLine1}
               <br className="hidden sm:block" />
-              We&apos;ll take care of the rest.
+              {homeContent.hero.titleLine2}
             </h1>
           </FadeIn>
           <FadeIn as="p" className="text-lg min-[480px]:text-xl sm:text-2xl text-white mb-8 sm:mb-10 max-w-xl mx-auto font-medium px-1">
-            From land, air to sea—supporting businesses to deliver on their promises.
+            {homeContent.hero.subtitle}
           </FadeIn>
           <FadeIn className="flex flex-wrap justify-center gap-3 sm:gap-4">
             <Link to="/about" className="hero-btn hero-btn-primary">
@@ -122,13 +114,9 @@ export function HomePage() {
               <h2 className="text-2xl sm:text-3xl font-bold text-acll-navy tracking-tight mt-1 mb-5">
                 Who we are
               </h2>
-              <p className="text-acll-navy/85 text-[15px] mb-6">
-                Founded in <strong>2014</strong>, Atlantic Catering & Logistics Limited is a multi-ISO
-                certified leader in corporate catering, camp management and integrated logistics, headquartered
-                in Ghana.
-              </p>
+              <p className="text-acll-navy/85 text-[15px] mb-6">{homeContent.whoWeAre.intro}</p>
               <ul className="space-y-2.5 text-acll-navy/85 text-[15px] mb-8">
-                {whoWeAreBullets.map((item) => (
+                {homeContent.whoWeAre.bullets.map((item) => (
                   <li key={item} className="flex items-center gap-2.5">
                     <span className="w-1 h-1 rounded-full bg-acll-navy/50" />
                     {item}

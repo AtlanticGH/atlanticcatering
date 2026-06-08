@@ -3,14 +3,13 @@ import { FadeIn } from '@/components/FadeIn'
 import { Link } from '@/components/Link'
 import { PageHero } from '@/components/PageHero'
 import { PillarLightbox } from '@/components/PillarLightbox'
-import {
-  sustainabilityPageData,
-  type AtlanticCaresMediaItem,
-  type ImpactMetric,
-  type SustainabilityInitiative,
-  type SustainabilityPillar,
+import { useContent } from '@/hooks/useSiteContent'
+import type {
+  AtlanticCaresMediaItem,
+  ImpactMetric,
+  SustainabilityInitiative,
+  SustainabilityPillar,
 } from '@/data/sustainability'
-import { newsArticles } from '@/data/news'
 import { assetUrl } from '@/utils/assets'
 
 const AUTO_PLAY_MS = 5000
@@ -52,7 +51,8 @@ function PillarIcon({ iconKey }: { iconKey: string }) {
 }
 
 function PillarsSection() {
-  const { pillarsIntro, pillars } = sustainabilityPageData
+  const { sustainability } = useContent()
+  const { pillarsIntro, pillars } = sustainability
 
   return (
     <div id="sustainability-pillars" className="sustainability-pillars py-16 lg:py-20 border-b border-acll-navy/[0.06]">
@@ -275,7 +275,7 @@ function focusTagClasses(focusKey: string) {
 }
 
 export function SustainabilityPage() {
-  const data = sustainabilityPageData
+  const { sustainability: data, news: newsArticles } = useContent()
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   const openLightbox = useCallback((image: GalleryImage) => {

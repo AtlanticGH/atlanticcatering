@@ -1,0 +1,38 @@
+{
+  "/": {
+    "title": "Atlantic Catering & Logistics Limited | Corporate Catering, Camp Management & Integrated Logistics",
+    "description": "Atlantic Catering and Logistics Limited delivers corporate catering, camp management and integrated logistics from land, air to sea. Multi-ISO certified. Ghana-headquartered since 2014."
+  },
+  "/about": {
+    "title": "About | Atlantic Catering & Logistics Limited",
+    "description": "Who we are: multi-ISO certified leader in corporate catering, camp management and integrated logistics. Ghana-headquartered since 2014. Our people, achievements and services."
+  },
+  "/services": {
+    "title": "Services | Atlantic Catering & Logistics Limited",
+    "description": "Offshore catering, camp management, inflight catering, VIP catering, events, ship chandelling, 24/7 support, school and hospital catering."
+  },
+  "/sustainability": {
+    "title": "Sustainability | Atlantic Catering & Logistics Limited",
+    "description": "Atlantic CARES sustainability framework: environmental responsibility, social impact, governance and measurable outcomes across our operations."
+  },
+  "/news": {
+    "title": "News | Atlantic Catering & Logistics Limited",
+    "description": "Latest news, awards and updates from Atlantic Catering & Logistics Limited."
+  },
+  "/careers": {
+    "title": "Careers | Atlantic Catering & Logistics Limited",
+    "description": "Join Atlantic Catering & Logistics. We are an equal opportunity employer. View current openings and send your CV to careers@atlanticcatering-gh.com."
+  },
+  "/contact": {
+    "title": "Contact | Atlantic Catering & Logistics Limited",
+    "description": "Get in touch with Atlantic Catering & Logistics. General enquiries, careers, and headquarters in Ghana."
+  },
+  "/shop": {
+    "title": "Shop | Atlantic Catering & Logistics Limited",
+    "description": "Retail products and palm oil line from Atlantic Catering & Logistics. E-commerce coming soon."
+  },
+  "/404": {
+    "title": "Page Not Found | Atlantic Catering & Logistics Limited",
+    "description": "The page you are looking for could not be found."
+  }
+}

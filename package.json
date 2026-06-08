@@ -5,6 +5,12 @@
     "dev": "npm run dev --prefix react-app",
     "build": "npm run build --prefix react-app",
     "lint": "npm run lint --prefix react-app",
-    "preview": "npm run preview --prefix react-app"
+    "preview": "npm run preview --prefix react-app",
+    "db:link": "supabase link --project-ref wnkmjyulvsbcyzdykhny",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "db:migration:new": "supabase migration new",
+    "content:generate-seed": "npm run content:generate-seed --prefix react-app",
+    "content:seed": "npm run content:seed --prefix react-app"
   }
 }

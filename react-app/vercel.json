@@ -14,7 +14,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets/|favicon\\.svg|icons\\.svg).*)",
+      "source": "/((?!api/|assets/|favicon\\.svg|icons\\.svg).*)",
       "destination": "/index.html"
     }
   ]

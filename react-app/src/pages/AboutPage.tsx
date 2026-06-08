@@ -3,8 +3,8 @@ import { PageHero } from '@/components/PageHero'
 import { FadeIn } from '@/components/FadeIn'
 import { PeopleCard } from '@/components/PeopleCard'
 import { ProfileModal } from '@/components/ProfileModal'
+import { useContent } from '@/hooks/useSiteContent'
 import type { Person } from '@/data/people'
-import { people } from '@/data/people'
 import { useAnimatedCounter } from '@/hooks/useAnimatedCounter'
 
 const achievements = [
@@ -71,6 +71,7 @@ function WorkforceStat({ target, label }: { target: number; label: string }) {
 }
 
 export function AboutPage() {
+  const { people } = useContent()
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null)
 
   useAnimatedCounter('.workforce-stat')

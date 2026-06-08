@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import { AdminApp } from '@/cms/AdminApp'
+import { ContentProvider } from '@/context/ContentContext'
 import { MainLayout } from '@/layouts/MainLayout'
 
 const HomePage = lazy(() => import('@/pages/HomePage').then((m) => ({ default: m.HomePage })))
@@ -25,11 +27,22 @@ function PageLoader() {
   )
 }
 
+function PublicSiteShell() {
+  return (
+    <ContentProvider>
+      <Suspense fallback={<PageLoader />}>
+        <Outlet />
+      </Suspense>
+    </ContentProvider>
+  )
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
+      <Routes>
+        <Route path="/admin/*" element={<AdminApp />} />
+        <Route element={<PublicSiteShell />}>
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="about" element={<AboutPage />} />
@@ -43,8 +56,8 @@ export default function App() {
             <Route path="shop" element={<EcommercePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
-        </Routes>
-      </Suspense>
+        </Route>
+      </Routes>
     </BrowserRouter>
   )
 }

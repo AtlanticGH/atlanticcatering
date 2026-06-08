@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from '@/components/Footer'
 import { Navbar } from '@/components/Navbar'
 import { SkipLink } from '@/components/SkipLink'
+import { useContent } from '@/hooks/useSiteContent'
 import { applyPageMeta } from '@/utils/pageMeta'
 import { scrollToHash } from '@/utils/scroll'
 
@@ -11,6 +12,7 @@ const BODY_BASE_CLASS =
 
 export function MainLayout() {
   const location = useLocation()
+  const { pageMeta } = useContent()
   const isHomePage = location.pathname === '/'
   const hasContactFooter = isHomePage || location.pathname === '/about'
 
@@ -21,9 +23,9 @@ export function MainLayout() {
   useEffect(() => {
     const isNewsArticle = /^\/news\/.+/.test(location.pathname)
     if (!isNewsArticle) {
-      applyPageMeta(location.pathname)
+      applyPageMeta(location.pathname, undefined, pageMeta)
     }
-  }, [location.pathname])
+  }, [location.pathname, pageMeta])
 
   useEffect(() => {
     if (location.hash) {

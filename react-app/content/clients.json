@@ -1,0 +1,94 @@
+{
+  "row1": [
+    {
+      "src": "images/clients/tullow.png",
+      "alt": "Tullow"
+    },
+    {
+      "src": "images/clients/newmont.png",
+      "alt": "Newmont"
+    },
+    {
+      "src": "images/clients/saipem.png",
+      "alt": "Saipem"
+    },
+    {
+      "src": "images/clients/borr-drill.png",
+      "alt": "BORR Drill"
+    },
+    {
+      "src": "images/clients/mantrac.png",
+      "alt": "Mantrac"
+    },
+    {
+      "src": "images/clients/Orica.png",
+      "alt": "Orica"
+    },
+    {
+      "src": "images/clients/Vivo.png",
+      "alt": "Vivo"
+    },
+    {
+      "src": "images/clients/Kaltire.png",
+      "alt": "Kaltire"
+    },
+    {
+      "src": "images/clients/Steval.png",
+      "alt": "Steval"
+    },
+    {
+      "src": "images/clients/ctp.png",
+      "alt": "CTP"
+    },
+    {
+      "src": "images/clients/MODEC.png",
+      "alt": "MODEC"
+    }
+  ],
+  "row2": [
+    {
+      "src": "images/clients/Aviance.png",
+      "alt": "Aviance"
+    },
+    {
+      "src": "images/clients/UMA.png",
+      "alt": "UMA"
+    },
+    {
+      "src": "images/clients/AMS.png",
+      "alt": "AMS"
+    },
+    {
+      "src": "images/clients/McDan.png",
+      "alt": "McDan"
+    },
+    {
+      "src": "images/clients/Fluor.png",
+      "alt": "Fluor"
+    },
+    {
+      "src": "images/clients/ENI.png",
+      "alt": "ENI"
+    },
+    {
+      "src": "images/clients/logistics-direct.png",
+      "alt": "Logistics Direct"
+    },
+    {
+      "src": "images/clients/GIS.png",
+      "alt": "GIS"
+    },
+    {
+      "src": "images/clients/Nyaho.png",
+      "alt": "Nyaho"
+    },
+    {
+      "src": "images/clients/AEL.png",
+      "alt": "AEL"
+    },
+    {
+      "src": "images/clients/WFP.png",
+      "alt": "WFP"
+    }
+  ]
+}

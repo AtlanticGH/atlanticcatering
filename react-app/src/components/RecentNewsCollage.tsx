@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { FadeIn } from '@/components/FadeIn'
 import { useFadeIn } from '@/hooks/useFadeIn'
-import { newsArticles, type NewsArticle } from '@/data/news'
+import { useContent } from '@/hooks/useSiteContent'
+import type { NewsArticle } from '@/data/news'
 
 const variantClass: Record<string, string> = {
   large: 'recent-news-collage-tile--large',
@@ -37,6 +38,8 @@ function CollageTile({ article }: { article: NewsArticle }) {
 }
 
 export function RecentNewsCollage() {
+  const { news: newsArticles } = useContent()
+
   return (
     <section className="recent-news-section py-16 lg:py-24" aria-labelledby="recent-news-heading">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">

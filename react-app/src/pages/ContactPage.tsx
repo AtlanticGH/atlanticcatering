@@ -1,8 +1,10 @@
 import { PageHero } from '@/components/PageHero'
 import { FadeIn } from '@/components/FadeIn'
 import { ContactForm } from '@/components/ContactForm'
+import { useContent } from '@/hooks/useSiteContent'
 
 export function ContactPage() {
+  const { contact: contactContent } = useContent()
   return (
     <div className="contact-page">
       <PageHero
@@ -21,32 +23,32 @@ export function ContactPage() {
               <div className="space-y-4">
                 <div>
                   <a
-                    href="mailto:info@atlanticcatering-gh.com"
+                    href={`mailto:${contactContent.email}`}
                     className="text-acll-navy font-medium hover:text-acll-green transition-colors"
                   >
-                    info@atlanticcatering-gh.com
+                    {contactContent.email}
                   </a>
-                  <p className="text-[13px] text-acll-muted mt-0.5">Response within 24 hours</p>
+                  <p className="text-[13px] text-acll-muted mt-0.5">{contactContent.emailNote}</p>
                 </div>
                 <div>
                   <a
-                    href="tel:+233302000000"
+                    href={`tel:${contactContent.phoneHref}`}
                     className="text-acll-navy font-medium hover:text-acll-green transition-colors"
                   >
-                    +233 30 200 0000
+                    {contactContent.phone}
                   </a>
-                  <p className="text-[13px] text-acll-muted mt-0.5">Mon–Fri, 8am–5pm GMT</p>
+                  <p className="text-[13px] text-acll-muted mt-0.5">{contactContent.phoneNote}</p>
                 </div>
                 <div>
-                  <p className="text-acll-navy font-medium">Headquartered in Ghana</p>
-                  <p className="text-[13px] text-acll-muted mt-0.5">Accra</p>
+                  <p className="text-acll-navy font-medium">{contactContent.location}</p>
+                  <p className="text-[13px] text-acll-muted mt-0.5">{contactContent.city}</p>
                 </div>
                 <div>
                   <a
-                    href="mailto:careers@atlanticcatering-gh.com"
+                    href={`mailto:${contactContent.careersEmail}`}
                     className="text-acll-navy font-medium hover:text-acll-green transition-colors"
                   >
-                    careers@atlanticcatering-gh.com
+                    {contactContent.careersEmail}
                   </a>
                   <p className="text-[13px] text-acll-muted mt-0.5">Careers &amp; vacancies</p>
                 </div>
@@ -92,7 +94,7 @@ export function ContactPage() {
           <FadeIn className="contact-map-card rounded-2xl overflow-hidden border border-acll-navy/[0.08] shadow-md bg-white">
             <div className="contact-map-wrapper min-h-[45vh] sm:min-h-[50vh] relative bg-acll-gray/20">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.486923508749!2d-0.1870!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9084b2b7a773%3A0xbed14f6e9d14c2b8!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1700000000000!5m2!1sen!2sgh"
+                src={contactContent.mapEmbedUrl}
                 className="contact-map absolute inset-0 w-full h-full border-0"
                 title="Atlantic Catering & Logistics – Accra, Ghana"
                 loading="lazy"

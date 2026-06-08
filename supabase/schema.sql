@@ -1,0 +1,3 @@
+-- Deprecated: use supabase/migrations instead.
+-- Apply to remote:  npm run db:push
+-- Apply locally:    npm run db:reset

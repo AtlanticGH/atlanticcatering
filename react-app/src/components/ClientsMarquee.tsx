@@ -1,4 +1,4 @@
-import { clientRow1, clientRow2 } from '@/data/clients'
+import { useContent } from '@/hooks/useSiteContent'
 import type { ClientLogo } from '@/data/clients'
 
 function ClientLogoItem({ src, alt }: ClientLogo) {
@@ -32,6 +32,7 @@ function ClientRow({ logos, direction }: { logos: ClientLogo[]; direction: 'left
 }
 
 export function ClientsMarquee() {
+  const { clients } = useContent()
   return (
     <section className="clients-section py-16 lg:py-24 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-10">
@@ -43,8 +44,8 @@ export function ClientsMarquee() {
         </h2>
       </div>
       <div className="space-y-4">
-        <ClientRow logos={clientRow1} direction="left" />
-        <ClientRow logos={clientRow2} direction="right" />
+        <ClientRow logos={clients.row1} direction="left" />
+        <ClientRow logos={clients.row2} direction="right" />
       </div>
     </section>
   )

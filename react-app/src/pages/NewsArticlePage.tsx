@@ -1,21 +1,26 @@
 import { useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { Link } from '@/components/Link'
-import { getNewsArticleBySlug } from '@/data/news'
+import { useContent } from '@/hooks/useSiteContent'
 import { applyPageMeta } from '@/utils/pageMeta'
 
 export function NewsArticlePage() {
   const { slug } = useParams<{ slug: string }>()
-  const article = slug ? getNewsArticleBySlug(slug) : undefined
+  const { news, pageMeta } = useContent()
+  const article = slug ? news.find((item) => item.slug === slug) : undefined
 
   useEffect(() => {
     if (article) {
-      applyPageMeta('/news', {
-        articleTitle: article.title,
-        articleDescription: article.excerpt,
-      })
+      applyPageMeta(
+        '/news',
+        {
+          articleTitle: article.title,
+          articleDescription: article.excerpt,
+        },
+        pageMeta,
+      )
     }
-  }, [article])
+  }, [article, pageMeta])
 
   if (!article) {
     return <Navigate to="/404" replace />

@@ -1,10 +1,11 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { homeServices } from '@/data/services'
+import { useContent } from '@/hooks/useSiteContent'
 
 const CARD_WIDTH = 288 + 16
 
 export function ServicesScroll() {
+  const { homeServices } = useContent()
   const scrollRef = useRef<HTMLDivElement>(null)
 
   function scrollBy(direction: 'prev' | 'next') {

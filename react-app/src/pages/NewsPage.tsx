@@ -3,7 +3,8 @@ import { FadeIn } from '@/components/FadeIn'
 import { Link } from '@/components/Link'
 import { PageHero } from '@/components/PageHero'
 import { useFadeIn } from '@/hooks/useFadeIn'
-import { newsArticles, type NewsArticle, type NewsCategoryKey } from '@/data/news'
+import { useContent } from '@/hooks/useSiteContent'
+import type { NewsArticle, NewsCategoryKey } from '@/data/news'
 
 function NewsTile({ article }: { article: NewsArticle }) {
   const ref = useFadeIn()
@@ -42,6 +43,7 @@ const FILTERS: { value: FilterValue; label: string }[] = [
 ]
 
 export function NewsPage() {
+  const { news: newsArticles } = useContent()
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all')
 
   const filteredArticles =

@@ -12,6 +12,25 @@ function navClass(active: boolean) {
   ].join(' ')
 }
 
+function AdminSidebar({ pathname }: { pathname: string }) {
+  return (
+    <div className="rounded-2xl border border-acll-navy/[0.08] bg-white p-4 shadow-sm">
+      <p className="mb-3 px-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-acll-muted">
+        Pages
+      </p>
+      <nav className="mb-4 space-y-0.5">
+        <Link to="/admin" className={navClass(pathname === '/admin')}>
+          Overview
+        </Link>
+        <Link to="/admin/media" className={navClass(pathname === '/admin/media')}>
+          Media library
+        </Link>
+      </nav>
+      <CmsSidebarSections pathname={pathname} />
+    </div>
+  )
+}
+
 export function AdminShell() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -22,8 +41,8 @@ export function AdminShell() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-white font-sans text-acll-navy antialiased">
-      <header className="bg-acll-navy text-white border-b border-white/5">
+    <div className="flex h-[100dvh] flex-col overflow-hidden bg-white font-sans text-acll-navy antialiased">
+      <header className="shrink-0 bg-acll-navy text-white border-b border-white/5">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-5 lg:py-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4 sm:gap-6 min-w-0">
@@ -63,34 +82,19 @@ export function AdminShell() {
         </div>
       </header>
 
-      <div className="flex-1 bg-acll-gray/35 border-b border-acll-navy/[0.06]">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 lg:py-10">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-10 items-start">
-            <aside className="lg:sticky lg:top-8">
-              <div className="rounded-2xl border border-acll-navy/[0.08] bg-white p-4 shadow-sm">
-                <p className="mb-3 px-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-acll-muted">
-                  Pages
-                </p>
-                <nav className="mb-4 space-y-0.5">
-                  <Link to="/admin" className={navClass(pathname === '/admin')}>
-                    Overview
-                  </Link>
-                  <Link to="/admin/media" className={navClass(pathname === '/admin/media')}>
-                    Media library
-                  </Link>
-                </nav>
-                <CmsSidebarSections pathname={pathname} />
-              </div>
-            </aside>
+      <div className="flex min-h-0 flex-1 overflow-hidden bg-acll-gray/35 border-b border-acll-navy/[0.06]">
+        <div className="mx-auto flex h-full w-full max-w-6xl min-h-0 flex-col px-5 sm:px-8 lg:flex-row lg:gap-10">
+          <aside className="shrink-0 border-b border-acll-navy/[0.06] py-4 lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-b-0 lg:py-8">
+            <AdminSidebar pathname={pathname} />
+          </aside>
 
-            <main className="min-w-0">
-              <Outlet />
-            </main>
-          </div>
+          <main className="min-h-0 flex-1 overflow-y-auto py-4 lg:py-8">
+            <Outlet />
+          </main>
         </div>
       </div>
 
-      <footer className="bg-white border-t border-acll-navy/[0.06] py-5">
+      <footer className="shrink-0 bg-white border-t border-acll-navy/[0.06] py-5">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-3 text-[13px] text-acll-muted">
           <p>Atlantic Catering &amp; Logistics Limited</p>
           <Link to="/" className="font-medium text-acll-navy hover:text-acll-green transition-colors">

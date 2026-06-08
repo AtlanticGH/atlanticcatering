@@ -147,11 +147,7 @@ export function Navbar({ isHomePage = false }: NavbarProps) {
 
       <div
         id="mobile-menu"
-        className={
-          mobileMenuOpen
-            ? 'lg:hidden bg-white border-t border-acll-navy/[0.06]'
-            : 'hidden'
-        }
+        className={mobileMenuOpen ? 'lg:hidden mobile-menu-panel' : 'hidden'}
         role="navigation"
         aria-label="Mobile menu"
       >

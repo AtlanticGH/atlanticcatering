@@ -702,6 +702,39 @@ section.bg-acll-navy h6 {
 #main-nav .nav-link.text-acll-green {
   font-weight: 600;
 }
+/* Mobile dropdown: frosted glass panel */
+.mobile-menu-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 12px 40px rgba(11, 28, 45, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .mobile-menu-panel {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}
+
+#main-nav.nav-over-hero .mobile-menu-panel {
+  background: rgba(11, 28, 45, 0.58);
+  border-top-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+#main-nav.nav-over-hero .mobile-menu-panel a {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+#main-nav.nav-over-hero .mobile-menu-panel a.font-medium {
+  color: #55BE52;
+}
+
 #mobile-menu a {
   font-size: 1rem;
   font-weight: 500;
@@ -749,6 +782,11 @@ section.bg-acll-navy h6 {
 .page-index #main-nav #mobile-menu-btn:hover,
 .page-index #mobile-menu a:hover {
   color: #042A2B;
+}
+
+.page-index #main-nav.nav-over-hero .mobile-menu-panel a:hover {
+  color: #55BE52;
+  background: rgba(255, 255, 255, 0.08);
 }
 .page-index #main-nav.nav-over-hero .nav-link:hover,
 .page-index #main-nav.nav-over-hero #mobile-menu-btn:hover {

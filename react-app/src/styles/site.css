@@ -648,11 +648,11 @@ section.bg-acll-navy h6 {
 /* Scroll indicator: mouse icon with bounce + wheel */
 @keyframes scroll-indicator-bounce {
   0%, 100% {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
     opacity: 0.6;
   }
   50% {
-    transform: translate(-50%, 6px);
+    transform: translateY(6px);
     opacity: 1;
   }
 }

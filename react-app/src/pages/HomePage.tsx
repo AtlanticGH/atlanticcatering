@@ -69,27 +69,29 @@ export function HomePage() {
             </Link>
           </FadeIn>
         </div>
-        <button
-          type="button"
-          className="scroll-indicator-mouse absolute bottom-12 sm:bottom-14 left-1/2 -translate-x-1/2 z-10 inline-flex flex-col items-center text-white/60 hero-scroll-hover transition-colors"
-          aria-label="Scroll down"
-          onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-        >
-          <svg
-            className="scroll-indicator-mouse-svg w-8 h-10 sm:w-9 sm:h-11"
-            viewBox="0 0 24 32"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+        <div className="absolute bottom-12 sm:bottom-14 left-0 right-0 z-10 flex justify-center pointer-events-none">
+          <button
+            type="button"
+            className="scroll-indicator-mouse pointer-events-auto inline-flex flex-col items-center text-white/60 hero-scroll-hover transition-colors"
+            aria-label="Scroll down"
+            onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
           >
-            <rect x="5" y="2" width="14" height="26" rx="7" />
-            <line x1="9" y1="10" x2="15" y2="10" className="scroll-indicator-wheel" />
-          </svg>
-          <span className="text-[10px] sm:text-xs mt-1 uppercase tracking-widest opacity-80">Scroll</span>
-        </button>
+            <svg
+              className="scroll-indicator-mouse-svg w-8 h-10 sm:w-9 sm:h-11"
+              viewBox="0 0 24 32"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="5" y="2" width="14" height="26" rx="7" />
+              <line x1="9" y1="10" x2="15" y2="10" className="scroll-indicator-wheel" />
+            </svg>
+            <span className="text-[10px] sm:text-xs mt-1 uppercase tracking-widest opacity-80">Scroll</span>
+          </button>
+        </div>
       </section>
 
       {/* Stats */}

@@ -20,7 +20,7 @@ export function ServiceCard({ service, onSelect }: ServiceCardProps) {
     <FadeIn
       as="article"
       id={service.id}
-      className="service-card"
+      className="service-card group cursor-pointer"
       role="button"
       tabIndex={0}
       aria-label={`View service: ${service.name}`}
@@ -35,11 +35,14 @@ export function ServiceCard({ service, onSelect }: ServiceCardProps) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-acll-navy/90 via-acll-navy/25 to-transparent" />
           <div className="absolute inset-0 flex items-end p-5 lg:p-6">
-            <div>
-              <h3 className="text-white font-semibold text-[15px] lg:text-[16px] tracking-tight">
+            <div className="leading-tight">
+              <h3 className="text-white font-semibold text-[15px] lg:text-[16px] tracking-tight leading-tight">
                 {service.name}
               </h3>
-              <p className="text-white/80 text-[13px] mt-0.5">{service.tagline}</p>
+              <p className="text-white/80 text-[13px] mt-0.5 leading-snug">{service.tagline}</p>
+              <span className="inline-block text-acll-green text-[13px] font-medium mt-1.5 leading-none group-hover:underline">
+                Read more →
+              </span>
             </div>
           </div>
         </div>

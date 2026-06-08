@@ -75,8 +75,8 @@ export function ServicesScroll() {
                 {service.name}
               </h3>
               <p className="text-sm text-acll-muted mb-4 leading-relaxed">{service.tagline}</p>
-              <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-acll-green group-hover:gap-2 transition-all">
-                Learn more <span aria-hidden="true">→</span>
+              <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-acll-green group-hover:gap-2 group-hover:underline transition-all">
+                Read more <span aria-hidden="true">→</span>
               </span>
             </Link>
           ))}

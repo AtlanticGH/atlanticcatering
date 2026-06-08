@@ -53,6 +53,7 @@ export function NewsEditor({
       onChange={onChange}
       getItemId={(item) => item.slug || 'new-article'}
       getItemLabel={(item) => item.title || 'Untitled article'}
+      getItemThumbnail={(item) => item.image || item.collageImage}
       createItem={emptyArticle}
       addLabel="Add article"
       renderItem={(item, _index, update) => (

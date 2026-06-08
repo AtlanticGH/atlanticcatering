@@ -23,6 +23,7 @@ function LogoRowEditor({
         onChange={onChange}
         getItemId={(item, index) => `${item.alt || 'logo'}-${index}`}
         getItemLabel={(item) => item.alt || 'Untitled logo'}
+        getItemThumbnail={(item) => item.src}
         createItem={emptyLogo}
         addLabel="Add logo"
         renderItem={(item, _index, update) => (

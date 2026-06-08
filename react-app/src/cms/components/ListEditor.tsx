@@ -1,10 +1,12 @@
 import { useState, type ReactNode } from 'react'
+import { AdminImagePreview } from '@/cms/components/AdminImagePreview'
 
 export function ListEditor<T>({
   items,
   onChange,
   getItemId,
   getItemLabel,
+  getItemThumbnail,
   renderItem,
   createItem,
   addLabel = 'Add item',
@@ -13,6 +15,7 @@ export function ListEditor<T>({
   onChange: (items: T[]) => void
   getItemId: (item: T, index: number) => string
   getItemLabel: (item: T, index: number) => string
+  getItemThumbnail?: (item: T, index: number) => string | undefined
   renderItem: (item: T, index: number, update: (next: T) => void) => ReactNode
   createItem: () => T
   addLabel?: string
@@ -46,7 +49,14 @@ export function ListEditor<T>({
             key={id}
             className="rounded-xl border border-acll-navy/[0.08] bg-acll-gray/25 overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-3">
+            <div className="flex items-center gap-3 px-4 py-3">
+              {getItemThumbnail?.(item, index) ? (
+                <AdminImagePreview
+                  src={getItemThumbnail(item, index)!}
+                  alt=""
+                  className="h-11 w-11 shrink-0 rounded-md"
+                />
+              ) : null}
               <button
                 type="button"
                 onClick={() => setOpenId(isOpen ? null : id)}

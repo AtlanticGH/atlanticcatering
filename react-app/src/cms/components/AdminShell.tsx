@@ -72,9 +72,12 @@ export function AdminShell() {
                   Collections
                 </p>
                 <nav className="space-y-0.5">
-                  <Link to="/admin" className={navClass(pathname === '/admin')}>
-                    Overview
-                  </Link>
+            <Link to="/admin" className={navClass(pathname === '/admin')}>
+              Overview
+            </Link>
+            <Link to="/admin/media" className={navClass(pathname === '/admin/media')}>
+              Media library
+            </Link>
                   {CMS_COLLECTIONS.map((collection) => {
                     const href = `/admin/collections/${collection.id}`
                     return (

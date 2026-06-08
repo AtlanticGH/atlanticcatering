@@ -19,6 +19,7 @@ export function ServicesPageEditor({
       onChange={onChange}
       getItemId={(item) => item.id || 'new-service'}
       getItemLabel={(item) => item.name || 'Untitled service'}
+      getItemThumbnail={(item) => item.image}
       createItem={emptyService}
       addLabel="Add service"
       renderItem={(item, _index, update) => (

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { MediaUploadField } from '@/cms/components/MediaUploadField'
 
 export const fieldInputClass =
   'w-full rounded-lg border border-acll-navy/15 bg-white px-3 py-2.5 text-[15px] text-acll-navy outline-none transition-colors placeholder:text-acll-muted/50 focus:border-acll-green focus:ring-2 focus:ring-acll-green/15'
@@ -109,14 +110,40 @@ export function SelectInput({
 export function ImagePathInput({
   value,
   onChange,
+  previewAlt = 'Image preview',
+}: {
+  value: string
+  onChange: (value: string) => void
+  previewAlt?: string
+}) {
+  return (
+    <MediaUploadField
+      kind="image"
+      label="Image"
+      hint="Upload an image or use a site path (images/…) or uploaded path (cms-images/…)"
+      value={value}
+      onChange={onChange}
+      previewAlt={previewAlt}
+    />
+  )
+}
+
+export function VideoPathInput({
+  value,
+  onChange,
 }: {
   value: string
   onChange: (value: string) => void
 }) {
   return (
-    <Field label="Image path" hint="Relative path, e.g. images/DSC04606.jpg">
-      <TextInput value={value} onChange={onChange} placeholder="images/..." />
-    </Field>
+    <MediaUploadField
+      kind="video"
+      label="Video"
+      hint="Upload a video or use a site path (video/…) or uploaded path (cms-videos/…)"
+      value={value}
+      onChange={onChange}
+      previewAlt="Video preview"
+    />
   )
 }
 

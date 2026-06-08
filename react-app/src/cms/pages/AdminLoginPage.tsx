@@ -2,12 +2,15 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signIn } from '@/lib/supabase/auth'
 import { isSupabaseConfigured } from '@/lib/supabase/client'
+import { resolveAssetPath } from '@/lib/content/resolveAssets'
 import { assetUrl } from '@/utils/assets'
 
 const inputClass =
   'contact-input-minimal w-full px-0 py-2.5 border-0 border-b border-acll-navy/15 bg-transparent text-acll-navy text-[15px] placeholder-acll-muted/60 focus:outline-none focus:border-acll-navy focus:ring-0 transition-colors'
 
 const labelClass = 'block text-[12px] font-medium text-acll-navy mb-1'
+
+const LOGIN_IMAGE = 'images/DSC04606.jpg'
 
 function LoginShell({
   introTitle,
@@ -19,39 +22,61 @@ function LoginShell({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
-      <header className="bg-acll-navy text-white border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-5 lg:py-6">
-          <Link to="/" className="inline-block">
-            <img
-              src={assetUrl('images/Atlantic logo.png')}
-              alt="Atlantic Catering & Logistics"
-              className="h-9 w-auto max-h-10 object-contain object-left"
-              width={180}
-              height={40}
-            />
-          </Link>
-        </div>
-      </header>
+    <div className="flex min-h-screen flex-col lg:flex-row bg-white">
+      <div className="flex min-h-screen flex-1 flex-col">
+        <header className="bg-acll-navy text-white border-b border-white/5">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 py-5 lg:py-6">
+            <Link to="/" className="inline-block">
+              <img
+                src={assetUrl('images/Atlantic logo.png')}
+                alt="Atlantic Catering & Logistics"
+                className="h-9 w-auto max-h-10 object-contain object-left"
+                width={180}
+                height={40}
+              />
+            </Link>
+          </div>
+        </header>
 
-      <section className="flex-1 flex items-center py-12 lg:py-16 bg-white">
-        <div className="w-full max-w-md mx-auto px-5 sm:px-8">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-acll-navy mb-3">
-            {introTitle}
-          </h2>
-          <p className="text-[15px] leading-relaxed text-acll-muted mb-8">{introDescription}</p>
-          {children}
-        </div>
-      </section>
+        <section className="flex flex-1 items-center py-12 lg:py-16">
+          <div className="w-full max-w-md mx-auto px-5 sm:px-8 lg:mx-0 lg:ml-auto lg:mr-12 xl:mr-20">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-acll-navy mb-3">
+              {introTitle}
+            </h2>
+            <p className="text-[15px] leading-relaxed text-acll-muted mb-8">{introDescription}</p>
+            {children}
+          </div>
+        </section>
 
-      <footer className="border-t border-acll-navy/[0.06] bg-acll-gray/40 py-6">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-3 text-[13px] text-acll-muted">
-          <p>Atlantic Catering &amp; Logistics Limited</p>
-          <Link to="/" className="font-medium text-acll-navy hover:text-acll-green transition-colors">
-            ← Back to website
-          </Link>
+        <footer className="border-t border-acll-navy/[0.06] bg-acll-gray/40 py-6">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-3 text-[13px] text-acll-muted">
+            <p>Atlantic Catering &amp; Logistics Limited</p>
+            <Link to="/" className="font-medium text-acll-navy hover:text-acll-green transition-colors">
+              ← Back to website
+            </Link>
+          </div>
+        </footer>
+      </div>
+
+      <aside className="relative hidden lg:block lg:w-[44%] xl:w-[42%] min-h-screen">
+        <img
+          src={resolveAssetPath(LOGIN_IMAGE)}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-acll-navy via-acll-navy/55 to-acll-navy/25" />
+        <div className="absolute inset-0 flex flex-col justify-end p-10 xl:p-14">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-acll-green/90 mb-3">
+            Atlantic Catering &amp; Logistics
+          </p>
+          <p className="text-2xl xl:text-3xl font-bold tracking-tight text-white leading-snug max-w-md">
+            Edit your website content in one place.
+          </p>
+          <p className="mt-3 text-[15px] text-white/70 max-w-sm leading-relaxed">
+            News, team profiles, services, and page copy — updated without touching code.
+          </p>
         </div>
-      </footer>
+      </aside>
     </div>
   )
 }

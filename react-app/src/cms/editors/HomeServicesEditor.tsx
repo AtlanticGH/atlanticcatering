@@ -19,6 +19,7 @@ export function HomeServicesEditor({
       onChange={onChange}
       getItemId={(item) => item.id || 'new-home-service'}
       getItemLabel={(item) => item.title || 'Untitled service'}
+      getItemThumbnail={(item) => item.image}
       createItem={emptyHomeService}
       addLabel="Add home service tile"
       renderItem={(item, _index, update) => (

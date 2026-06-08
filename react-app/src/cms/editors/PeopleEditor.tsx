@@ -19,6 +19,7 @@ export function PeopleEditor({
       onChange={onChange}
       getItemId={(item) => item.name || 'new-person'}
       getItemLabel={(item) => item.name || 'Untitled person'}
+      getItemThumbnail={(item) => item.image}
       createItem={emptyPerson}
       addLabel="Add team member"
       renderItem={(item, _index, update) => (

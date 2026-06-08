@@ -1,9 +1,13 @@
+import { getCmsMediaPublicUrl } from '@/lib/supabase/storage'
 import { assetUrl } from '@/utils/assets'
 
 export function resolveAssetPath(path: string): string {
   if (!path) return path
   if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('/')) {
     return path
+  }
+  if (path.startsWith('cms-images/') || path.startsWith('cms-videos/')) {
+    return getCmsMediaPublicUrl(path) ?? path
   }
   return assetUrl(path)
 }
@@ -23,7 +27,9 @@ export function resolveAssetPathsDeep<T>(value: T): T {
     if (
       value.startsWith('images/') ||
       value.startsWith('video/') ||
-      value.startsWith('assets/')
+      value.startsWith('assets/') ||
+      value.startsWith('cms-images/') ||
+      value.startsWith('cms-videos/')
     ) {
       return resolveAssetPath(value.replace(/^assets\//, '')) as T
     }

@@ -4,6 +4,7 @@ import { AdminShell } from '@/cms/components/AdminShell'
 import { AdminCollectionPage } from '@/cms/pages/AdminCollectionPage'
 import { AdminDashboardPage } from '@/cms/pages/AdminDashboardPage'
 import { AdminLoginPage } from '@/cms/pages/AdminLoginPage'
+import { AdminMediaPage } from '@/cms/pages/AdminMediaPage'
 import { getSession } from '@/lib/supabase/auth'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -42,6 +43,7 @@ export function AdminApp() {
         }
       >
         <Route index element={<AdminDashboardPage />} />
+        <Route path="media" element={<AdminMediaPage />} />
         <Route path="collections/:id" element={<AdminCollectionPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/admin" replace />} />

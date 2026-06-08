@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { CMS_COLLECTIONS } from '@/cms/collections'
+import { CmsSidebarSections } from '@/cms/components/CmsPageSections'
 import { signOut } from '@/lib/supabase/auth'
 import { assetUrl } from '@/utils/assets'
 
@@ -65,28 +65,21 @@ export function AdminShell() {
 
       <div className="flex-1 bg-acll-gray/35 border-b border-acll-navy/[0.06]">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 lg:py-10">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,13rem)_1fr] lg:gap-10 items-start">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-10 items-start">
             <aside className="lg:sticky lg:top-8">
               <div className="rounded-2xl border border-acll-navy/[0.08] bg-white p-4 shadow-sm">
                 <p className="mb-3 px-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-acll-muted">
-                  Collections
+                  Pages
                 </p>
-                <nav className="space-y-0.5">
-            <Link to="/admin" className={navClass(pathname === '/admin')}>
-              Overview
-            </Link>
-            <Link to="/admin/media" className={navClass(pathname === '/admin/media')}>
-              Media library
-            </Link>
-                  {CMS_COLLECTIONS.map((collection) => {
-                    const href = `/admin/collections/${collection.id}`
-                    return (
-                      <Link key={collection.id} to={href} className={navClass(pathname === href)}>
-                        {collection.label}
-                      </Link>
-                    )
-                  })}
+                <nav className="mb-4 space-y-0.5">
+                  <Link to="/admin" className={navClass(pathname === '/admin')}>
+                    Overview
+                  </Link>
+                  <Link to="/admin/media" className={navClass(pathname === '/admin/media')}>
+                    Media library
+                  </Link>
                 </nav>
+                <CmsSidebarSections pathname={pathname} />
               </div>
             </aside>
 

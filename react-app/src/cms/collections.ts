@@ -18,79 +18,146 @@ export interface CmsCollectionMeta {
   editor: 'list' | 'object' | 'json'
 }
 
-export const CMS_COLLECTIONS: CmsCollectionMeta[] = [
+export interface CmsPageSection {
+  id: string
+  label: string
+  path: string | null
+  collectionIds: CmsCollectionId[]
+}
+
+const ALL_COLLECTIONS: CmsCollectionMeta[] = [
   {
-    id: 'news',
-    label: 'News Articles',
-    description: 'News listing, article pages, and home page collage.',
-    file: 'news.json',
-    editor: 'list',
+    id: 'home',
+    label: 'Hero & Who we are',
+    description: 'Home page headline, subtitle, and who-we-are intro with bullet points.',
+    file: 'home.json',
+    editor: 'object',
   },
   {
     id: 'stats',
-    label: 'Home Stats',
-    description: 'Animated counters on the home page.',
+    label: 'Stats counters',
+    description: 'Animated stat counters below the home hero.',
     file: 'stats.json',
     editor: 'list',
   },
   {
-    id: 'people',
-    label: 'Leadership Team',
-    description: 'About page team profiles and modals.',
-    file: 'people.json',
-    editor: 'list',
-  },
-  {
-    id: 'services-page',
-    label: 'Services Page',
-    description: 'Full services grid and detail modals.',
-    file: 'services-page.json',
-    editor: 'list',
-  },
-  {
     id: 'home-services',
-    label: 'Home Services Scroll',
+    label: 'Services scroll',
     description: 'Horizontal service tiles on the home page.',
     file: 'home-services.json',
     editor: 'list',
   },
   {
     id: 'clients',
-    label: 'Client Logos',
-    description: 'Marquee client logo rows.',
+    label: 'Client logos',
+    description: 'Client logo marquee rows on the home page.',
     file: 'clients.json',
     editor: 'object',
   },
   {
+    id: 'people',
+    label: 'Leadership team',
+    description: 'Team profiles and bios on the About page.',
+    file: 'people.json',
+    editor: 'list',
+  },
+  {
+    id: 'services-page',
+    label: 'Services grid',
+    description: 'Full services listing and detail modals on the Services page.',
+    file: 'services-page.json',
+    editor: 'list',
+  },
+  {
+    id: 'sustainability',
+    label: 'Page content',
+    description: 'Full Sustainability page content (advanced JSON editor).',
+    file: 'sustainability.json',
+    editor: 'json',
+  },
+  {
+    id: 'news',
+    label: 'Articles',
+    description: 'News articles — used on the News page and home page collage.',
+    file: 'news.json',
+    editor: 'list',
+  },
+  {
     id: 'contact',
-    label: 'Contact Page',
-    description: 'Emails, phone, location, and map embed.',
+    label: 'Contact details',
+    description: 'Email, phone, location, and map embed on the Contact page.',
     file: 'contact.json',
     editor: 'object',
   },
   {
     id: 'page-meta',
-    label: 'Page SEO',
-    description: 'Titles and meta descriptions per route.',
+    label: 'SEO & page titles',
+    description: 'Meta titles and descriptions for every route.',
     file: 'page-meta.json',
     editor: 'object',
   },
+]
+
+const COLLECTION_MAP = Object.fromEntries(
+  ALL_COLLECTIONS.map((collection) => [collection.id, collection]),
+) as Record<CmsCollectionId, CmsCollectionMeta>
+
+/** Matches public site page order: Home → About → Services → Sustainability → News → Contact */
+export const CMS_PAGE_SECTIONS: CmsPageSection[] = [
   {
     id: 'home',
-    label: 'Home Page Copy',
-    description: 'Hero headline and who-we-are section.',
-    file: 'home.json',
-    editor: 'object',
+    label: 'Home',
+    path: '/',
+    collectionIds: ['home', 'stats', 'home-services', 'clients'],
+  },
+  {
+    id: 'about',
+    label: 'About',
+    path: '/about',
+    collectionIds: ['people'],
+  },
+  {
+    id: 'services',
+    label: 'Services',
+    path: '/services',
+    collectionIds: ['services-page'],
   },
   {
     id: 'sustainability',
     label: 'Sustainability',
-    description: 'Full sustainability page content (advanced JSON editor).',
-    file: 'sustainability.json',
-    editor: 'json',
+    path: '/sustainability',
+    collectionIds: ['sustainability'],
+  },
+  {
+    id: 'news',
+    label: 'News',
+    path: '/news',
+    collectionIds: ['news'],
+  },
+  {
+    id: 'contact',
+    label: 'Contact',
+    path: '/contact',
+    collectionIds: ['contact'],
+  },
+  {
+    id: 'site',
+    label: 'Site-wide',
+    path: null,
+    collectionIds: ['page-meta'],
   },
 ]
 
+export const CMS_COLLECTIONS: CmsCollectionMeta[] = CMS_PAGE_SECTIONS.flatMap((section) =>
+  section.collectionIds.map((id) => COLLECTION_MAP[id]),
+)
+
 export function getCollectionById(id: string): CmsCollectionMeta | undefined {
-  return CMS_COLLECTIONS.find((collection) => collection.id === id)
+  return COLLECTION_MAP[id as CmsCollectionId]
+}
+
+export function getCollectionsForSection(sectionId: string): CmsCollectionMeta[] {
+  const section = CMS_PAGE_SECTIONS.find((entry) => entry.id === sectionId)
+  if (!section) return []
+  return section.collectionIds.map((id) => COLLECTION_MAP[id])
 }

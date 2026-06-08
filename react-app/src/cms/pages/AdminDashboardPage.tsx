@@ -2,12 +2,13 @@ import { CmsDashboardSections } from '@/cms/components/CmsPageSections'
 
 export function AdminDashboardPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <header className="max-w-2xl">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-acll-navy">Overview</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-acll-muted">
-          Content is grouped by page, in the same order as the live site. Pick a section to edit
-          copy, images, and page content.
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-acll-green">Dashboard</p>
+        <h2 className="mt-1 text-xl font-bold tracking-tight text-acll-navy">Content overview</h2>
+        <p className="mt-2 text-[15px] leading-relaxed text-acll-muted">
+          Grouped by page in site order — Home, About, Services, Sustainability, News, Contact, then
+          site-wide settings.
         </p>
       </header>
 

@@ -1,0 +1,1182 @@
+/**
+ * Atlantic Catering and Logistics Limited – Main styles
+ */
+
+/* Skip to main content – hidden until focused (a11y) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #0B1C2D;
+  color: white;
+  border-radius: 0.375rem;
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-weight: 400;
+}
+
+/* Headings: green site-wide, except in hero (keep white) */
+h1, h2, h3, h4, h5, h6 {
+  color: #55BE52;
+}
+
+#hero-section h1,
+#hero-section h2,
+#hero-section h3,
+#hero-section h4,
+#hero-section h5,
+#hero-section h6 {
+  color: white;
+}
+
+/* Navy section heroes (about, news, contact, services, etc.): headings white */
+section.bg-acll-navy h1,
+section.bg-acll-navy h2,
+section.bg-acll-navy h3,
+section.bg-acll-navy h4,
+section.bg-acll-navy h5,
+section.bg-acll-navy h6 {
+  color: white;
+}
+
+/* Animated stats section: gradient background + coloured numbers */
+#stats {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+#stats .stat-number {
+  color: #55BE52;
+}
+
+/* Sustainability page: pillars + roadmap (hero uses standard page hero) */
+.sustainability-pillars {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+.sustainability-card h4,
+.sustainability-roadmap-card h3 {
+  color: #0B1C2D;
+}
+
+/* Sustainability: SDG focus section (grid of goal cards) */
+.sdg-focus-section .sdg-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .sdg-focus-section .sdg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .sdg-focus-section .sdg-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+.sdg-focus-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.25rem 1.25rem 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(11, 28, 45, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(11, 28, 45, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.sdg-focus-card:hover {
+  border-color: rgba(85, 190, 82, 0.4);
+  box-shadow: 0 6px 16px rgba(11, 28, 45, 0.08);
+  transform: translateY(-2px);
+}
+.sdg-focus-card .sdg-focus-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+.sdg-focus-card .sdg-focus-number {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(11, 28, 45, 0.5);
+  margin-bottom: 0.25rem;
+}
+.sdg-focus-card .sdg-focus-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0B1C2D;
+  margin-bottom: 0.375rem;
+}
+.sdg-focus-card .sdg-focus-desc {
+  font-size: 0.8125rem;
+  color: rgba(11, 28, 45, 0.65);
+  line-height: 1.4;
+}
+.sdg-focus-card:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+
+/* Sustainability: pillar headers – small SDG icon strip */
+.sdg-pillar-strip img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(11, 28, 45, 0.1);
+}
+
+/* Sustainability: restyled pillar cards (left accent) */
+.sustainability-card.sustainability-card--restyled {
+  border-radius: 1rem;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(11, 28, 45, 0.08);
+  border-left: 4px solid #55BE52;
+  box-shadow: 0 2px 6px rgba(11, 28, 45, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sustainability-card.sustainability-card--restyled:hover {
+  border-left-color: #55BE52;
+  border-color: rgba(85, 190, 82, 0.25);
+  box-shadow: 0 4px 12px rgba(11, 28, 45, 0.06);
+}
+
+/* Sustainability: roadmap section + restyled roadmap cards */
+.sustainability-roadmap-section {
+  background: rgba(232, 242, 232, 0.4);
+}
+.sustainability-roadmap-card.sustainability-roadmap-card--restyled {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(11, 28, 45, 0.06);
+  box-shadow: 0 2px 6px rgba(11, 28, 45, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sustainability-roadmap-card.sustainability-roadmap-card--restyled:hover {
+  border-color: rgba(85, 190, 82, 0.2);
+  box-shadow: 0 4px 12px rgba(11, 28, 45, 0.06);
+}
+.sustainability-roadmap-card.sustainability-roadmap-card--restyled h3 {
+  color: #0B1C2D;
+}
+
+/* About page: Careers section */
+.careers-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+.careers-section .careers-intro h3,
+.careers-section .careers-job-card h4 {
+  color: #0B1C2D;
+}
+.careers-cta:focus-visible {
+  outline: 2px solid #0B1C2D;
+  outline-offset: 2px;
+}
+
+/* News page: horizontal tile layout – scoped so Tailwind utilities cannot override */
+.news-tiles-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+  border-top: 1px solid rgba(11, 28, 45, 0.06);
+  border-bottom: 1px solid rgba(11, 28, 45, 0.06);
+}
+.news-tiles-section article {
+  margin: 0;
+}
+
+/* News filters – minimal, modern */
+.news-tiles-section .news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+}
+.news-tiles-section .news-filter-btn {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(11, 28, 45, 0.6);
+  background: none;
+  border: none;
+  padding: 0.375rem 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+.news-tiles-section .news-filter-btn:hover {
+  color: #0B1C2D;
+}
+.news-tiles-section .news-filter-btn.is-active {
+  color: #55BE52;
+}
+.news-tiles-section .news-filter-btn:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+
+.news-tiles-section .news-tile-horizontal {
+  display: flex !important;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(11, 28, 45, 0.08);
+  background: white;
+  box-shadow: 0 1px 3px rgba(11, 28, 45, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.news-tiles-section .news-tile-horizontal:hover {
+  border-color: rgba(85, 190, 82, 0.35);
+  box-shadow: 0 8px 24px rgba(11, 28, 45, 0.08);
+  transform: translateY(-2px);
+}
+.news-tiles-section .news-tile-horizontal:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .news-tiles-section .news-tile-horizontal:hover {
+    transform: none;
+  }
+}
+@media (min-width: 768px) {
+  .news-tiles-section .news-tile-horizontal {
+    flex-direction: row !important;
+    align-items: stretch;
+    min-height: 360px;
+    height: auto;
+    border-radius: 1.25rem;
+  }
+}
+.news-tiles-section .news-tile-horizontal .news-tile-image {
+  flex-shrink: 0;
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(145deg, rgba(11, 28, 45, 0.06) 0%, rgba(11, 28, 45, 0.03) 100%);
+}
+@media (min-width: 768px) {
+  .news-tiles-section .news-tile-horizontal .news-tile-image {
+    width: 360px;
+    min-width: 320px;
+    height: 360px;
+    border-radius: 1.25rem 0 0 1.25rem;
+  }
+}
+.news-tiles-section .news-tile-horizontal .news-tile-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .news-tiles-section .news-tile-horizontal .news-tile-body {
+    padding: 2rem 2.25rem;
+    text-align: left;
+  }
+}
+.news-tiles-section .news-tile-horizontal .news-tile-category {
+  color: #55BE52;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.375rem;
+}
+.news-tiles-section .news-tile-horizontal h2 {
+  color: #0B1C2D;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+  .news-tiles-section .news-tile-horizontal h2 {
+    font-size: 1.125rem;
+  }
+}
+.news-tiles-section .news-tile-horizontal .news-tile-excerpt {
+  color: rgba(11, 28, 45, 0.65);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+.news-tiles-section .news-tile-horizontal .news-tile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #55BE52;
+  margin-top: 0.25rem;
+}
+.news-tiles-section .news-tile-horizontal:hover .news-tile-link {
+  text-decoration: underline;
+}
+
+/* Index: Recent news – collage layout */
+.recent-news-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+  border-top: 1px solid rgba(11, 28, 45, 0.06);
+}
+.recent-news-collage {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.recent-news-collage-tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+.recent-news-collage-tile:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+.recent-news-collage-image {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(11, 28, 45, 0.05);
+}
+.recent-news-collage-tile--large .recent-news-collage-image {
+  aspect-ratio: 16/10;
+}
+.recent-news-collage-tile--small .recent-news-collage-image {
+  aspect-ratio: 4/3;
+}
+.recent-news-collage-copy {
+  padding: 0.75rem 0 0;
+}
+.recent-news-collage-title {
+  font-size: 1rem;
+  line-height: 1.35;
+  margin: 0 0 0.2rem;
+}
+.recent-news-collage-caption {
+  font-size: 0.8125rem;
+  color: rgba(11, 28, 45, 0.65);
+  line-height: 1.4;
+  margin: 0;
+}
+@media (min-width: 640px) {
+  .recent-news-collage {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: 100%;
+    min-height: 340px;
+  }
+  .recent-news-collage-tile--large {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .recent-news-collage-tile--large .recent-news-collage-image {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 0;
+  }
+  .recent-news-collage-tile--small {
+    grid-column: 2;
+  }
+  .recent-news-collage-tile--small .recent-news-collage-image {
+    aspect-ratio: 4/3;
+  }
+  .recent-news-collage-tile--offset {
+    margin-top: 0.75rem;
+    transform: translateY(0.5rem);
+  }
+}
+@media (min-width: 900px) {
+  .recent-news-collage {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 1.5rem;
+  }
+  .recent-news-collage-tile--large .recent-news-collage-image {
+    min-height: 320px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recent-news-collage-tile .recent-news-collage-image img {
+    transition: none;
+  }
+  .recent-news-collage-tile--offset {
+    transform: none;
+  }
+}
+
+/* About page: Our people, our future (workforce stats) – light background to differentiate from navy footer */
+.our-people-future-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+  border-top: 1px solid rgba(11, 28, 45, 0.06);
+  border-bottom: 1px solid rgba(11, 28, 45, 0.06);
+}
+.our-people-future-section h2 {
+  color: #0B1C2D;
+}
+.our-people-future-section .workforce-stat {
+  color: #0B1C2D;
+}
+
+/* Contact page */
+.contact-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+.contact-section .contact-info-card h3,
+.contact-section .contact-form label {
+  color: #0B1C2D;
+}
+.contact-input:focus {
+  border-color: rgba(85, 190, 82, 0.5);
+}
+.contact-submit:focus-visible {
+  outline: 2px solid #0B1C2D;
+  outline-offset: 2px;
+}
+/* Contact page: minimal style */
+.contact-page .contact-hero h1 {
+  color: #0B1C2D;
+}
+.contact-input-minimal:focus {
+  border-color: #0B1C2D;
+}
+.contact-submit-minimal:focus-visible,
+.contact-submit-btn:focus-visible {
+  outline: 2px solid #0B1C2D;
+  outline-offset: 2px;
+}
+.contact-location-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+.contact-location-section h2 {
+  color: #0B1C2D;
+}
+.contact-page select.contact-input-minimal {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B1C2D' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 1.25rem;
+  padding-right: 1.75rem;
+}
+.contact-map {
+  display: block;
+}
+.contact-map-section {
+  min-height: 55vh;
+}
+.contact-map-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Fade-in (scroll-triggered) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Our suite of services: horizontal scroll section */
+#services-suite h2 {
+  color: white;
+}
+
+/* Index only: stats-style gradient background, modern light cards */
+.services-suite--index {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+}
+
+#services-suite.services-suite--index .services-suite-title,
+#services-suite.services-suite--index h2.services-suite-title {
+  color: #0B1C2D;
+}
+
+/* Service tiles (index): white cards, subtle shadow, hover lift */
+.service-tile {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.service-tile:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-tile,
+  .service-tile h3,
+  .service-tile span,
+  .service-tile .service-tile-image img {
+    transition: none;
+  }
+  .service-tile .service-tile-image img:hover {
+    transform: none;
+  }
+}
+
+.services-suite-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.services-suite-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sustainability: Flagship initiatives – horizontal scroll, no scrollbar, fixed tile size */
+.initiatives-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.initiatives-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.track-tight {
+  letter-spacing: -0.02em;
+}
+
+/* Hero: full viewport height */
+.hero-full {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Hero overlay: green tint over background image */
+/* Hero background video: cover area, no controls, non-interactive */
+.hero-bg-video {
+  pointer-events: none;
+}
+
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(85, 190, 82, 0.25) 0%, rgba(85, 190, 82, 0.75) 100%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Hero buttons: liquid glass (#DB9933) */
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.hero-btn-primary {
+  background: linear-gradient(135deg, rgba(219, 153, 51, 0.85) 0%, rgba(219, 153, 51, 0.7) 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 4px 24px rgba(219, 153, 51, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+.hero-btn-primary:hover {
+  background: linear-gradient(135deg, rgba(219, 153, 51, 0.95) 0%, rgba(219, 153, 51, 0.85) 100%);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(219, 153, 51, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  transform: translateY(-1px);
+}
+
+.hero-btn-outline {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+.hero-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  transform: translateY(-1px);
+}
+
+.hero-scroll-hover {
+  transition: color 0.25s ease;
+}
+.hero-scroll-hover:hover {
+  color: #DB9933;
+}
+
+/* Scroll indicator: mouse icon with bounce + wheel */
+@keyframes scroll-indicator-bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, 6px);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-indicator-wheel {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.scroll-indicator-mouse {
+  animation: scroll-indicator-bounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator-mouse .scroll-indicator-wheel {
+  animation: scroll-indicator-wheel 2s ease-in-out infinite;
+}
+
+/* Header: gradual background over hero (--nav-bg-opacity set by JS) */
+#main-nav {
+  background-color: rgba(255, 255, 255, var(--nav-bg-opacity, 0));
+  border-bottom-color: rgba(11, 28, 45, calc(0.08 * var(--nav-bg-opacity, 0)));
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Header nav links: slightly bigger and bolder */
+#main-nav .nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+}
+#main-nav .nav-link.text-acll-green {
+  font-weight: 600;
+}
+#mobile-menu a {
+  font-size: 1rem;
+  font-weight: 500;
+}
+#mobile-menu a.font-medium {
+  font-weight: 600;
+}
+
+#main-nav.nav-over-hero .nav-link,
+#main-nav.nav-over-hero #mobile-menu-btn {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Header logo: swap image when nav background is visible (scrolled past hero) */
+.header-logo-hero {
+  display: none;
+}
+.header-logo-solid {
+  display: block;
+}
+#main-nav.nav-over-hero .header-logo-solid {
+  display: none;
+}
+#main-nav.nav-over-hero .header-logo-hero {
+  display: block;
+}
+
+/* Mobile: only when dropdown menu is open – always use colour logo */
+@media (max-width: 1023px) {
+  #main-nav.mobile-menu-open .header-logo-solid {
+    display: block !important;
+  }
+  #main-nav.mobile-menu-open .header-logo-hero {
+    display: none !important;
+  }
+}
+
+#main-nav.nav-over-hero .nav-link:hover,
+#main-nav.nav-over-hero #mobile-menu-btn:hover {
+  color: #55BE52;
+}
+
+/* Index page: hover color #042A2B */
+.page-index #main-nav .nav-link:hover,
+.page-index #main-nav #mobile-menu-btn:hover,
+.page-index #mobile-menu a:hover {
+  color: #042A2B;
+}
+.page-index #main-nav.nav-over-hero .nav-link:hover,
+.page-index #main-nav.nav-over-hero #mobile-menu-btn:hover {
+  color: #042A2B;
+}
+.page-index #main-nav .nav-link:hover svg,
+.page-index #main-nav.nav-over-hero .nav-link:hover svg {
+  color: inherit;
+}
+.page-index #main-nav #services-menu a:hover,
+.page-index #contact a:hover {
+  color: #042A2B;
+}
+.page-index a.hover\:text-acll-green:hover {
+  color: #042A2B;
+}
+
+#main-nav.nav-over-hero .nav-link svg {
+  color: inherit;
+}
+
+/* Focus visible for keyboard users */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+}
+#hero-section a:focus-visible,
+#hero-section button:focus-visible {
+  outline-color: #DB9933;
+}
+
+/* Footer */
+.site-footer,
+footer.bg-acll-navy {
+  background-color: #0B1C2D; /* acll-navy – same as Our people, our future section */
+}
+.site-footer h4 {
+  color: inherit;
+}
+.site-footer .footer-heading {
+  color: rgba(255, 255, 255, 0.7);
+}
+.site-footer .footer-link:hover {
+  color: #55BE52;
+}
+.page-index .site-footer .footer-link:hover {
+  color: #042A2B;
+}
+
+/* Clients: two rows scrolling in opposite directions */
+/* Client logo: image placeholder with fallback when PNG missing */
+.client-logo .client-logo-img {
+  position: relative;
+  z-index: 1;
+}
+.client-logo .client-logo-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+.clients-section .clients-row-wrap {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@keyframes clients-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes clients-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.clients-row--left {
+  animation: clients-scroll-left 100s linear infinite;
+}
+
+.clients-row--right {
+  animation: clients-scroll-right 100s linear infinite;
+}
+
+/* Services page: square cards (same style as Our people – image + gradient overlay + name/tagline) */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .service-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .service-grid {
+    gap: 1.75rem;
+  }
+}
+
+.service-card {
+  scroll-margin-top: 6rem;
+  aspect-ratio: 1;
+  outline: none;
+}
+
+.service-card:focus-visible {
+  outline: 2px solid #55BE52;
+  outline-offset: 2px;
+  border-radius: 1rem;
+}
+
+.service-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-card-inner {
+  border: 1px solid rgba(11, 28, 45, 0.08);
+  box-shadow: 0 1px 3px rgba(11, 28, 45, 0.06);
+}
+
+.service-card-inner-bg {
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.35s ease;
+}
+
+.service-card:hover .service-card-inner-bg {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card:hover .service-card-inner-bg {
+    transform: none;
+  }
+  .fade-in {
+    transition: none;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* About page: Our people – square profile cards, name + role on image */
+.people-card {
+  outline: none;
+}
+
+.people-card-image {
+  position: relative;
+}
+
+.people-card-image-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.35s ease;
+}
+
+.people-card:hover .people-card-image-bg {
+  transform: scale(1.05);
+}
+
+/* Card image hover zoom – news tiles, pillar heroes, pillar thumbs, initiatives */
+.news-tiles-section .news-tile-image img {
+  transition: transform 0.35s ease;
+}
+.news-tiles-section .news-tile-horizontal:hover .news-tile-image img {
+  transform: scale(1.05);
+}
+.recent-news-collage-tile .recent-news-collage-image img {
+  transition: transform 0.35s ease;
+}
+.recent-news-collage-tile:hover .recent-news-collage-image img {
+  transform: scale(1.05);
+}
+.pillar-hero img,
+.pillar-hero .pillar-hero-img {
+  transition: transform 0.35s ease;
+}
+.pillar-hero:hover img,
+.pillar-hero:hover .pillar-hero-img {
+  transform: scale(1.05);
+}
+.pillar-gallery-thumb img {
+  transition: transform 0.35s ease;
+}
+.pillar-gallery-thumb:hover img {
+  transform: scale(1.05);
+}
+.initiatives-scroll article img {
+  transition: transform 0.35s ease;
+}
+.initiatives-scroll article:hover img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .people-card:hover .people-card-image-bg {
+    transform: none;
+  }
+  .news-tiles-section .news-tile-horizontal:hover .news-tile-image img,
+  .recent-news-collage-tile:hover .recent-news-collage-image img,
+  .pillar-hero:hover img,
+  .pillar-hero:hover .pillar-hero-img,
+  .pillar-gallery-thumb:hover img,
+  .initiatives-scroll article:hover img {
+    transform: none;
+  }
+}
+
+/* Profile & Service modals (Our people, Services) – shared styles */
+.profile-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.profile-modal.hidden {
+  display: none;
+}
+
+.profile-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 28, 45, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Full-page: when modal contains split panel (leadership), remove padding so panel can fill viewport */
+.profile-modal:has(.profile-modal-panel--split) {
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.profile-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 48rem;
+  max-height: 95vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Cover image at top of modal – full width */
+.profile-modal-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 12rem;
+  background-size: cover;
+  background-position: center;
+  background-color: #0B1C2D;
+}
+
+.profile-modal-cover + .profile-modal-content {
+  padding: 1.75rem 1.5rem 1.5rem;
+}
+
+.profile-modal-content {
+  padding: 1.5rem;
+}
+
+.profile-modal-content:first-child {
+  padding-top: 1.5rem;
+}
+
+.profile-modal-image {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Leadership modal only: full-page, image left, text right */
+.profile-modal-panel--split {
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.profile-modal-panel--split .profile-modal-body {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.profile-modal-panel--split .profile-modal-cover.profile-modal-image--side {
+  width: 50%;
+  flex: 0 0 50%;
+  min-width: 0;
+  aspect-ratio: auto;
+  min-height: 100vh;
+  border-radius: 0;
+}
+
+.profile-modal-panel--split .profile-modal-content {
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+  padding: 4.5rem 5rem 4.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.profile-modal-panel--split .profile-modal-content h2 {
+  font-size: 1.75rem;
+}
+
+.profile-modal-panel--split .profile-modal-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.profile-modal-bio p:not(:first-child) {
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .profile-modal-panel--split .profile-modal-body {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .profile-modal-panel--split .profile-modal-cover.profile-modal-image--side {
+    width: 100%;
+    min-height: 16rem;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+  }
+  .profile-modal-panel--split .profile-modal-content {
+    padding: 2.5rem 2rem 3rem;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+}
+
+/* Who we are – video preview (index): longer aspect, same height; hover video zoom; minimal transparent play icon */
+.video-preview-trigger {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 22rem;
+}
+@media (max-width: 1023px) {
+  .video-preview-trigger {
+    min-height: 10rem;
+    max-height: 45vh;
+    width: 100%;
+  }
+}
+.video-preview-trigger video,
+.video-preview-video {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+}
+.video-preview-trigger:hover .video-preview-video {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-preview-video,
+  .video-preview-play,
+  .video-preview-play-inner {
+    transition: none;
+  }
+  .video-preview-trigger:hover .video-preview-video {
+    transform: none;
+  }
+}
+
+/* Play icon: minimal, transparent until hover */
+.video-preview-play {
+  opacity: 0;
+  pointer-events: none;
+}
+.video-preview-trigger:hover .video-preview-play,
+.video-preview-trigger:focus-visible .video-preview-play {
+  opacity: 1;
+}
+.video-preview-play-inner {
+  width: 3.5rem;
+  height: 3.5rem;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.video-preview-trigger:hover .video-preview-play-inner,
+.video-preview-trigger:focus-visible .video-preview-play-inner {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Pulse the preview video when clicked */
+@keyframes video-preview-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.video-preview-trigger.video-preview-pulse .video-preview-video {
+  animation: video-preview-pulse 0.35s ease-out;
+}
+
+/* Video modal (Who we are) */
+.video-modal-panel {
+  max-width: 56rem;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+.video-modal-inner {
+  max-height: 85vh;
+}
+.video-modal-inner video {
+  max-height: 85vh;
+  width: 100%;
+  display: block;
+}

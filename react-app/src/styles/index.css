@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-acll-navy: #0b1c2d;
+  --color-acll-green: #55be52;
+  --color-acll-orange: #db9933;
+  --color-acll-gray: #eaeaea;
+  --color-acll-muted: #6b7280;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+@import './site.css';

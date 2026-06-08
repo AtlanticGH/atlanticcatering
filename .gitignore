@@ -1,0 +1,9 @@
+.DS_Store
+*.local
+
+# Dependencies & build output
+react-app/node_modules/
+react-app/dist/
+
+# Duplicate archived assets (live copy is in react-app/public/assets/)
+archive-unused/assets/

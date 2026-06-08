@@ -447,8 +447,8 @@ section.bg-acll-navy h6 {
   transition: transform 0.35s ease;
 }
 
-.people-featured-card:hover .people-featured-card-image-bg {
-  transform: scale(1.03);
+.people-featured-card-image:hover .people-featured-card-image-bg {
+  transform: scale(1.05);
 }
 
 /* About page: Our people, our future (workforce stats) – light background to differentiate from navy footer */
@@ -1021,7 +1021,7 @@ footer.bg-acll-navy {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .people-featured-card:hover .people-featured-card-image-bg {
+  .people-featured-card-image:hover .people-featured-card-image-bg {
     transform: none;
   }
   .people-card:hover .people-card-image-bg {

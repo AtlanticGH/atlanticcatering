@@ -33,8 +33,8 @@ export function PeopleFeaturedCard({ person, onSelect }: PeopleFeaturedCardProps
       onClick={() => onSelect(person)}
       onKeyDown={handleKeyDown}
     >
-      <div className="grid lg:grid-cols-[minmax(260px,2fr)_minmax(0,3fr)] gap-0 items-stretch rounded-2xl overflow-hidden border border-acll-navy/[0.08] bg-white shadow-sm hover:shadow-md transition-shadow">
-        <div className="people-featured-card-image relative aspect-[3/4] lg:aspect-auto lg:min-h-[28rem] bg-acll-navy/10">
+      <div className="grid lg:grid-cols-[minmax(260px,2fr)_minmax(0,3fr)] gap-0 items-stretch rounded-2xl overflow-hidden border border-acll-navy/[0.08] bg-white shadow-sm">
+        <div className="people-featured-card-image relative aspect-[3/4] lg:aspect-auto lg:min-h-[28rem] overflow-hidden bg-acll-navy/10">
           <div
             className="people-featured-card-image-bg absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url('${assetUrl(person.image)}')` }}

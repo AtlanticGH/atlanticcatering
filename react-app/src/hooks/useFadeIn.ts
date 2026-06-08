@@ -1,29 +1,53 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useRef, type RefCallback } from 'react'
 
-const DEFAULT_OPTIONS: IntersectionObserverInit = {
+const FADE_IN_OPTIONS: IntersectionObserverInit = {
   threshold: 0.1,
   rootMargin: '0px 0px -40px 0px',
 }
 
-export function useFadeIn(options: IntersectionObserverInit = DEFAULT_OPTIONS) {
-  const ref = useRef<HTMLElement>(null)
+function revealElement(element: Element) {
+  element.classList.add('visible')
+}
 
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
+function isInViewport(element: Element) {
+  const rect = element.getBoundingClientRect()
+  return rect.top < window.innerHeight && rect.bottom > 0
+}
+
+export function useFadeIn(): RefCallback<Element> {
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const fallbackRef = useRef<number | null>(null)
+
+  return useCallback((element: Element | null) => {
+    if (observerRef.current) {
+      observerRef.current.disconnect()
+      observerRef.current = null
+    }
+
+    if (fallbackRef.current !== null) {
+      window.clearTimeout(fallbackRef.current)
+      fallbackRef.current = null
+    }
+
+    if (!element || !(element instanceof HTMLElement)) return
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
+          revealElement(entry.target)
         }
       })
-    }, options)
+    }, FADE_IN_OPTIONS)
 
     observer.observe(element)
+    observerRef.current = observer
 
-    return () => observer.disconnect()
-  }, [options.threshold, options.root, options.rootMargin])
+    if (isInViewport(element)) {
+      revealElement(element)
+    }
 
-  return ref
+    fallbackRef.current = window.setTimeout(() => {
+      revealElement(element)
+    }, 800)
+  }, [])
 }

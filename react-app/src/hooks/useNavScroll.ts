@@ -39,6 +39,8 @@ export function useNavScroll(isHomePage: boolean) {
     return () => {
       window.removeEventListener('scroll', updateNavBackground)
       window.removeEventListener('resize', updateNavBackground)
+      mainNav.style.removeProperty('--nav-bg-opacity')
+      mainNav.classList.remove('nav-over-hero', 'backdrop-blur-md', 'shadow-sm')
     }
   }, [isHomePage])
 }

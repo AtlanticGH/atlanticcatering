@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { scrollToHash } from '@/utils/scroll'
 import { PageHero } from '@/components/PageHero'
 import { FadeIn } from '@/components/FadeIn'
 import { ServiceCard } from '@/components/ServiceCard'
@@ -13,12 +14,7 @@ export function ServicesPage() {
 
   useEffect(() => {
     if (!location.hash) return
-
-    const id = location.hash.slice(1)
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    scrollToHash(location.hash)
   }, [location.hash])
 
   return (

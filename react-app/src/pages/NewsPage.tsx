@@ -2,7 +2,35 @@ import { useState } from 'react'
 import { FadeIn } from '@/components/FadeIn'
 import { Link } from '@/components/Link'
 import { PageHero } from '@/components/PageHero'
-import { newsArticles, type NewsCategoryKey } from '@/data/news'
+import { useFadeIn } from '@/hooks/useFadeIn'
+import { newsArticles, type NewsArticle, type NewsCategoryKey } from '@/data/news'
+
+function NewsTile({ article }: { article: NewsArticle }) {
+  const ref = useFadeIn()
+
+  return (
+    <article className="news-tile-item" role="listitem">
+      <Link ref={ref} to={`/news/${article.slug}`} className="fade-in news-tile-horizontal">
+        <div className="news-tile-image flex items-center justify-center overflow-hidden bg-acll-gray aspect-video shrink-0">
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            width={360}
+            height={203}
+          />
+        </div>
+        <div className="news-tile-body">
+          <span className="news-tile-category">{article.category}</span>
+          <h2>{article.title}</h2>
+          <p className="news-tile-excerpt">{article.excerpt}</p>
+          <span className="news-tile-link">Read more →</span>
+        </div>
+      </Link>
+    </article>
+  )
+}
 
 type FilterValue = 'all' | NewsCategoryKey
 
@@ -51,30 +79,9 @@ export function NewsPage() {
             ))}
           </FadeIn>
 
-          <div id="news-tiles-list" className="space-y-6 mt-10" role="list">
+          <div id="news-tiles-list" className="flex flex-col gap-8 lg:gap-10 mt-10" role="list">
             {filteredArticles.map((article) => (
-              <article key={article.slug} className="news-tile-item" role="listitem">
-                <FadeIn>
-                <Link to={`/news/${article.slug}`} className="news-tile-horizontal">
-                  <div className="news-tile-image flex items-center justify-center overflow-hidden bg-acll-gray aspect-video shrink-0">
-                    <img
-                      src={article.image}
-                      alt={article.imageAlt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      width={360}
-                      height={203}
-                    />
-                  </div>
-                  <div className="news-tile-body">
-                    <span className="news-tile-category">{article.category}</span>
-                    <h2>{article.title}</h2>
-                    <p className="news-tile-excerpt">{article.excerpt}</p>
-                    <span className="news-tile-link">Read more →</span>
-                  </div>
-                </Link>
-                </FadeIn>
-              </article>
+              <NewsTile key={article.slug} article={article} />
             ))}
           </div>
 

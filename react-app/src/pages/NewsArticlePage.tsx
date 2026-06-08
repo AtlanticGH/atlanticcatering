@@ -1,10 +1,18 @@
+import { useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { Link } from '@/components/Link'
 import { getNewsArticleBySlug } from '@/data/news'
+import { applyPageMeta } from '@/utils/pageMeta'
 
 export function NewsArticlePage() {
   const { slug } = useParams<{ slug: string }>()
   const article = slug ? getNewsArticleBySlug(slug) : undefined
+
+  useEffect(() => {
+    if (article) {
+      applyPageMeta('/news', article.title)
+    }
+  }, [article])
 
   if (!article) {
     return <Navigate to="/404" replace />
@@ -42,7 +50,7 @@ export function NewsArticlePage() {
 
         <div className="prose prose-acll max-w-none text-acll-navy/85 text-[15px] leading-relaxed space-y-4">
           {article.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
           ))}
         </div>
 

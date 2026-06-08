@@ -201,7 +201,7 @@ section.bg-acll-navy h6 {
   border-top: 1px solid rgba(11, 28, 45, 0.06);
   border-bottom: 1px solid rgba(11, 28, 45, 0.06);
 }
-.news-tiles-section article {
+.news-tiles-section article.news-tile-item {
   margin: 0;
 }
 

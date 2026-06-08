@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from '@/components/Footer'
 import { Navbar } from '@/components/Navbar'
 import { SkipLink } from '@/components/SkipLink'
-import { useNavScroll } from '@/hooks/useNavScroll'
 import { applyPageMeta } from '@/utils/pageMeta'
 import { scrollToHash } from '@/utils/scroll'
 
@@ -14,8 +13,6 @@ export function MainLayout() {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
   const hasContactFooter = isHomePage || location.pathname === '/about'
-
-  useNavScroll(isHomePage)
 
   useEffect(() => {
     document.body.className = isHomePage ? `${BODY_BASE_CLASS} page-index` : BODY_BASE_CLASS
@@ -40,7 +37,8 @@ export function MainLayout() {
   return (
     <>
       <SkipLink />
-      <Navbar isHomePage={isHomePage} />
+      <Navbar key={location.pathname} isHomePage={isHomePage} />
+      <div className="header-spacer" aria-hidden="true" />
       <main id="main-content">
         <Outlet />
       </main>

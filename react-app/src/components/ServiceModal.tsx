@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { ModalCloseButton } from '@/components/ModalCloseButton'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { assetUrl } from '@/utils/assets'
 
@@ -64,6 +65,7 @@ export function ServiceModal({ service, isOpen, onClose }: ServiceModalProps) {
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
+        <ModalCloseButton onClose={onClose} />
         <div className="profile-modal-cover" style={coverStyle} />
         <div className="profile-modal-content">
           <h2 id="service-modal-title" className="text-xl font-semibold text-acll-navy tracking-tight mb-1">

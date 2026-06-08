@@ -46,17 +46,24 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   },
 }
 
-export function applyPageMeta(pathname: string, articleTitle?: string): void {
-  if (articleTitle) {
-    document.title = `${articleTitle} | News | ${SITE_NAME}`
+function setMetaDescription(content: string): void {
+  const descriptionTag = document.querySelector('meta[name="description"]')
+  if (descriptionTag) {
+    descriptionTag.setAttribute('content', content)
+  }
+}
+
+export function applyPageMeta(
+  pathname: string,
+  options?: { articleTitle?: string; articleDescription?: string },
+): void {
+  if (options?.articleTitle) {
+    document.title = `${options.articleTitle} | News | ${SITE_NAME}`
+    setMetaDescription(options.articleDescription ?? PAGE_META['/news'].description)
     return
   }
 
   const meta = PAGE_META[pathname] ?? PAGE_META['/404']
   document.title = meta.title
-
-  const descriptionTag = document.querySelector('meta[name="description"]')
-  if (descriptionTag) {
-    descriptionTag.setAttribute('content', meta.description)
-  }
+  setMetaDescription(meta.description)
 }

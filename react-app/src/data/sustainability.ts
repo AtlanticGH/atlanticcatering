@@ -411,8 +411,8 @@ export const sustainabilityPageData: SustainabilityPageData = {
     heading: 'Explore our sustainability reporting',
     body:
       'Access our latest sustainability report or speak with our team about how we can support your ESG objectives on the ground.',
-    primaryLabel: 'Download sustainability report',
-    primaryHref: '#',
+    primaryLabel: 'Request sustainability report',
+    primaryHref: '/contact',
     secondaryLabel: 'Talk to our sustainability team',
     secondaryHref: '/contact',
   },

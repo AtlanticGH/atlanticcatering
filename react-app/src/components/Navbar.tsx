@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState, type CSSProperties } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
+import { useNavScroll } from '@/hooks/useNavScroll'
 import { NAV_LINKS } from '@/utils/navigation'
 import { assetUrl } from '@/utils/assets'
 
@@ -10,6 +11,7 @@ interface NavbarProps {
 
 export function Navbar({ isHomePage = false }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const navScroll = useNavScroll(isHomePage)
 
   useBodyScrollLock(mobileMenuOpen)
 
@@ -21,14 +23,35 @@ export function Navbar({ isHomePage = false }: NavbarProps) {
     setMobileMenuOpen((open) => !open)
   }, [])
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    const handleChange = () => {
+      if (mediaQuery.matches) {
+        setMobileMenuOpen(false)
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  const headerStyle = {
+    '--nav-bg-opacity': navScroll.navBgOpacity,
+  } as CSSProperties
+
   return (
     <header
       id="main-nav"
+      style={headerStyle}
       className={[
-        'sticky top-0 z-50 border-b transition-all duration-300',
+        'border-b transition-all duration-300',
         isHomePage
-          ? 'border-transparent nav-over-hero backdrop-blur-0'
-          : 'bg-white/90 backdrop-blur-md border-acll-navy/[0.06]',
+          ? navScroll.overHero
+            ? 'border-transparent nav-over-hero'
+            : 'border-acll-navy/[0.06]'
+          : 'border-acll-navy/[0.06]',
+        navScroll.hasBlur ? 'backdrop-blur-md' : isHomePage ? 'backdrop-blur-0' : 'backdrop-blur-md',
+        navScroll.hasShadow ? 'shadow-sm' : '',
         mobileMenuOpen ? 'mobile-menu-open' : '',
       ]
         .filter(Boolean)

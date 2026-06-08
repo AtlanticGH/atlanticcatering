@@ -1,0 +1,10 @@
+{
+  "name": "atlanticcatering-website",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix react-app",
+    "build": "npm run build --prefix react-app",
+    "lint": "npm run lint --prefix react-app",
+    "preview": "npm run preview --prefix react-app"
+  }
+}

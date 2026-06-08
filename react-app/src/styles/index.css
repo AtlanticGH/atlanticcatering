@@ -10,7 +10,8 @@
 }
 
 html {
-  overflow-x: hidden;
+  /* clip avoids horizontal scroll without breaking position:sticky/fixed headers */
+  overflow-x: clip;
 }
 
 body {
@@ -22,7 +23,6 @@ body {
   line-height: 1.625;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 @import './site.css';

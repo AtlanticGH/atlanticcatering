@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { ModalCloseButton } from '@/components/ModalCloseButton'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { assetUrl } from '@/utils/assets'
 
@@ -66,6 +67,7 @@ export function ProfileModal({ person, isOpen, onClose }: ProfileModalProps) {
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
+        <ModalCloseButton onClose={onClose} />
         <div className="profile-modal-body">
           <div
             className="profile-modal-cover profile-modal-image profile-modal-image--side"

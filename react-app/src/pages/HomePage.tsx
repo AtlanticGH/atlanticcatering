@@ -77,10 +77,11 @@ export function HomePage() {
             </Link>
           </FadeIn>
         </div>
-        <a
-          href="#stats"
+        <button
+          type="button"
           className="scroll-indicator-mouse absolute bottom-12 sm:bottom-14 left-1/2 -translate-x-1/2 z-10 inline-flex flex-col items-center text-white/60 hero-scroll-hover transition-colors"
           aria-label="Scroll down"
+          onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
         >
           <svg
             className="scroll-indicator-mouse-svg w-8 h-10 sm:w-9 sm:h-11"
@@ -96,7 +97,7 @@ export function HomePage() {
             <line x1="9" y1="10" x2="15" y2="10" className="scroll-indicator-wheel" />
           </svg>
           <span className="text-[10px] sm:text-xs mt-1 uppercase tracking-widest opacity-80">Scroll</span>
-        </a>
+        </button>
       </section>
 
       {/* Stats */}

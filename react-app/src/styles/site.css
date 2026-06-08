@@ -670,11 +670,28 @@ section.bg-acll-navy h6 {
   animation: scroll-indicator-wheel 2s ease-in-out infinite;
 }
 
-/* Header: gradual background over hero (--nav-bg-opacity set by JS) */
+/* Header: fixed at top; spacer in layout preserves document flow */
 #main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
   background-color: rgba(255, 255, 255, var(--nav-bg-opacity, 0));
   border-bottom-color: rgba(11, 28, 45, calc(0.08 * var(--nav-bg-opacity, 0)));
   transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-spacer {
+  height: 5rem;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .header-spacer {
+    height: 6rem;
+  }
 }
 
 /* Header nav links: slightly bigger and bolder */

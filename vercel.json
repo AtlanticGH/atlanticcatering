@@ -3,6 +3,18 @@
   "installCommand": "cd react-app && npm install",
   "buildCommand": "cd react-app && npm run build",
   "outputDirectory": "react-app/dist",
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/services.html", "destination": "/services", "permanent": true },
+    { "source": "/sustainability.html", "destination": "/sustainability", "permanent": true },
+    { "source": "/news.html", "destination": "/news", "permanent": true },
+    { "source": "/careers.html", "destination": "/careers", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/ecommerce.html", "destination": "/shop", "permanent": true },
+    { "source": "/news/:slug.html", "destination": "/news/:slug", "permanent": true },
+    { "source": "/team/:path*", "destination": "/about", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/((?!assets/|favicon\\.svg|icons\\.svg).*)",

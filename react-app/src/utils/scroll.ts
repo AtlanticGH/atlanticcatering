@@ -1,4 +1,4 @@
-export function scrollToHash(hash: string, maxAttempts = 12): void {
+export function scrollToHash(hash: string, maxAttempts = 50, intervalMs = 100): void {
   if (!hash || hash === '#') return
 
   const id = hash.startsWith('#') ? hash.slice(1) : hash
@@ -15,7 +15,7 @@ export function scrollToHash(hash: string, maxAttempts = 12): void {
 
     attempts += 1
     if (attempts < maxAttempts) {
-      window.setTimeout(tryScroll, 50)
+      window.setTimeout(tryScroll, intervalMs)
     }
   }
 

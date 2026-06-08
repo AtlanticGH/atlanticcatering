@@ -10,7 +10,10 @@ export function NewsArticlePage() {
 
   useEffect(() => {
     if (article) {
-      applyPageMeta('/news', article.title)
+      applyPageMeta('/news', {
+        articleTitle: article.title,
+        articleDescription: article.excerpt,
+      })
     }
   }, [article])
 

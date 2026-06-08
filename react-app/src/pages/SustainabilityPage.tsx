@@ -10,6 +10,7 @@ import {
   type SustainabilityInitiative,
   type SustainabilityPillar,
 } from '@/data/sustainability'
+import { newsArticles } from '@/data/news'
 import { assetUrl } from '@/utils/assets'
 
 const AUTO_PLAY_MS = 5000
@@ -184,12 +185,12 @@ function PillarGallery({
   return (
     <>
       <p className="text-xs font-medium text-slate-500 mb-2">Click any photo to view</p>
-      <div className="pillar-gallery flex flex-nowrap gap-2 mb-6">
+      <div className="pillar-gallery flex gap-2 mb-6 overflow-x-auto pb-1 snap-x snap-mandatory">
         {images.map((image, index) => (
           <button
             key={image.src}
             type="button"
-            className="pillar-gallery-thumb flex-1 aspect-[16/9] rounded-lg overflow-hidden border-2 border-transparent hover:border-acll-green focus:outline-none focus:ring-2 focus:ring-acll-green relative"
+            className="pillar-gallery-thumb shrink-0 w-28 sm:w-36 md:flex-1 md:min-w-0 aspect-[16/9] rounded-lg overflow-hidden border-2 border-transparent hover:border-acll-green focus:outline-none focus:ring-2 focus:ring-acll-green relative snap-start"
             aria-label={`View photo ${index + 1}`}
             onClick={() => onImageClick(image)}
           >
@@ -596,6 +597,21 @@ export function SustainabilityPage() {
             <h3 id="news-heading" className="text-xs font-semibold uppercase tracking-[0.2em] text-acll-green mb-6">
               {data.journey2030.newsHeading}
             </h3>
+            <ul className="space-y-3">
+              {newsArticles.map((article) => (
+                <li key={article.slug}>
+                  <Link
+                    to={`/news/${article.slug}`}
+                    className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 rounded-xl border border-acll-navy/[0.08] bg-white px-4 py-3 hover:border-acll-green/40 hover:shadow-sm transition"
+                  >
+                    <span className="text-sm font-medium text-acll-navy group-hover:text-acll-green transition-colors">
+                      {article.title}
+                    </span>
+                    <span className="text-xs text-acll-muted shrink-0">{article.year}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <FadeIn className="rounded-2xl border border-acll-navy/[0.08] bg-acll-gray/40 p-6 sm:p-8 lg:p-10" aria-labelledby="careers-heading">
@@ -684,12 +700,12 @@ export function SustainabilityPage() {
               <p className="text-sm sm:text-base text-white/80">{data.cta.body}</p>
             </div>
             <div className="mt-6 lg:mt-0 flex flex-col sm:flex-row gap-3 shrink-0">
-              <a
-                href={data.cta.primaryHref}
+              <Link
+                to={data.cta.primaryHref}
                 className="inline-flex items-center justify-center rounded-full bg-acll-green px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-acll-green/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acll-green focus-visible:ring-offset-2 focus-visible:ring-offset-acll-navy"
               >
                 {data.cta.primaryLabel}
-              </a>
+              </Link>
               <Link
                 to={data.cta.secondaryHref}
                 className="inline-flex items-center justify-center rounded-full border border-white/30 px-5 py-2.5 text-sm font-medium text-white/90 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acll-green focus-visible:ring-offset-2 focus-visible:ring-offset-acll-navy"

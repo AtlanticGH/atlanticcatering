@@ -14,8 +14,8 @@ export function ServicesPage() {
 
   useEffect(() => {
     if (!location.hash) return
-    scrollToHash(location.hash)
-  }, [location.hash])
+    scrollToHash(location.hash, 60, 100)
+  }, [location.pathname, location.hash])
 
   return (
     <>

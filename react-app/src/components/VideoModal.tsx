@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { ModalCloseButton } from '@/components/ModalCloseButton'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { assetUrl } from '@/utils/assets'
 
@@ -72,6 +73,7 @@ export function VideoModal({
         ref={panelRef}
         tabIndex={-1}
       >
+        <ModalCloseButton onClose={onClose} variant="light" />
         <div className="video-modal-inner rounded-xl overflow-hidden bg-acll-navy">
           <video
             id="video-modal-player"

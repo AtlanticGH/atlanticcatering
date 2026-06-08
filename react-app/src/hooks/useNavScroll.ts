@@ -1,46 +1,118 @@
-import { useEffect } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 
-export function useNavScroll(isHomePage: boolean) {
-  useEffect(() => {
-    const mainNav = document.getElementById('main-nav')
-    const heroSection = document.getElementById('hero-section')
+export interface NavScrollState {
+  navBgOpacity: number
+  overHero: boolean
+  hasBlur: boolean
+  hasShadow: boolean
+}
 
-    if (!mainNav) return
+const DEFAULT_HOME_STATE: NavScrollState = {
+  navBgOpacity: 0,
+  overHero: true,
+  hasBlur: false,
+  hasShadow: false,
+}
 
-    const updateNavBackground = () => {
-      if (heroSection && isHomePage) {
-        const heroTop = heroSection.offsetTop
-        const heroHeight = heroSection.offsetHeight
-        const scrollY = window.scrollY
-        const progress =
-          heroHeight > 0 ? Math.min(1, Math.max(0, (scrollY - heroTop) / heroHeight)) : 1
+const DEFAULT_PAGE_STATE: NavScrollState = {
+  navBgOpacity: 0.9,
+  overHero: false,
+  hasBlur: true,
+  hasShadow: true,
+}
 
-        mainNav.style.setProperty('--nav-bg-opacity', String(progress * 0.9))
+let cachedHomeSnapshot: NavScrollState = DEFAULT_HOME_STATE
 
-        if (progress >= 0.5) {
-          mainNav.classList.remove('nav-over-hero')
-        } else {
-          mainNav.classList.add('nav-over-hero')
+function computeHomeNavState(heroSection: HTMLElement): NavScrollState {
+  const heroTop = heroSection.offsetTop
+  const heroHeight = heroSection.offsetHeight
+  const scrollY = window.scrollY
+  const progress =
+    heroHeight > 0 ? Math.min(1, Math.max(0, (scrollY - heroTop) / heroHeight)) : 1
+
+  return {
+    navBgOpacity: progress * 0.9,
+    overHero: progress < 0.5,
+    hasBlur: progress > 0,
+    hasShadow: progress >= 1,
+  }
+}
+
+function statesEqual(a: NavScrollState, b: NavScrollState): boolean {
+  return (
+    a.navBgOpacity === b.navBgOpacity &&
+    a.overHero === b.overHero &&
+    a.hasBlur === b.hasBlur &&
+    a.hasShadow === b.hasShadow
+  )
+}
+
+function getNavScrollSnapshot(isHomePage: boolean): NavScrollState {
+  if (!isHomePage) return DEFAULT_PAGE_STATE
+
+  const heroSection = document.getElementById('hero-section')
+  if (!heroSection) return DEFAULT_HOME_STATE
+
+  const next = computeHomeNavState(heroSection)
+  if (statesEqual(cachedHomeSnapshot, next)) {
+    return cachedHomeSnapshot
+  }
+
+  cachedHomeSnapshot = next
+  return cachedHomeSnapshot
+}
+
+export function useNavScroll(isHomePage: boolean): NavScrollState {
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      window.addEventListener('scroll', onStoreChange, { passive: true })
+      window.addEventListener('resize', onStoreChange)
+
+      let resizeObserver: ResizeObserver | null = null
+      let retryTimer: number | null = null
+
+      const observeHero = () => {
+        const heroSection = document.getElementById('hero-section')
+        if (!heroSection) return false
+
+        if (retryTimer !== null) {
+          window.clearInterval(retryTimer)
+          retryTimer = null
         }
 
-        mainNav.classList.toggle('backdrop-blur-md', progress > 0)
-        mainNav.classList.toggle('shadow-sm', progress >= 1)
-      } else {
-        mainNav.style.setProperty('--nav-bg-opacity', '0.9')
-        mainNav.classList.remove('nav-over-hero')
-        mainNav.classList.add('backdrop-blur-md', 'shadow-sm')
+        resizeObserver?.disconnect()
+        resizeObserver = new ResizeObserver(onStoreChange)
+        resizeObserver.observe(heroSection)
+        onStoreChange()
+        return true
       }
-    }
 
-    updateNavBackground()
-    window.addEventListener('scroll', updateNavBackground, { passive: true })
-    window.addEventListener('resize', updateNavBackground)
+      if (isHomePage && !observeHero()) {
+        retryTimer = window.setInterval(() => {
+          observeHero()
+        }, 50)
+      }
 
-    return () => {
-      window.removeEventListener('scroll', updateNavBackground)
-      window.removeEventListener('resize', updateNavBackground)
-      mainNav.style.removeProperty('--nav-bg-opacity')
-      mainNav.classList.remove('nav-over-hero', 'backdrop-blur-md', 'shadow-sm')
-    }
-  }, [isHomePage])
+      onStoreChange()
+
+      return () => {
+        window.removeEventListener('scroll', onStoreChange)
+        window.removeEventListener('resize', onStoreChange)
+        resizeObserver?.disconnect()
+        if (retryTimer !== null) {
+          window.clearInterval(retryTimer)
+        }
+      }
+    },
+    [isHomePage],
+  )
+
+  const getSnapshot = useCallback(() => getNavScrollSnapshot(isHomePage), [isHomePage])
+
+  const getServerSnapshot = useCallback(
+    () => (isHomePage ? DEFAULT_HOME_STATE : DEFAULT_PAGE_STATE),
+    [isHomePage],
+  )
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

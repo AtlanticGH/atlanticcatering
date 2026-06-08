@@ -5,7 +5,7 @@ import {
   type CmsCollectionMeta,
   type CmsPageSection,
 } from '@/cms/collections'
-import { COLLECTION_VISUALS } from '@/cms/collectionVisuals'
+import { CMS_PREVIEW_OVERLAY, COLLECTION_VISUALS } from '@/cms/collectionVisuals'
 import { resolveAssetPath } from '@/lib/content/resolveAssets'
 
 const EDITOR_LABELS: Record<CmsCollectionMeta['editor'], string> = {
@@ -34,10 +34,7 @@ function CollectionOverviewCard({ collection }: { collection: CmsCollectionMeta 
           alt=""
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div
-          className={`absolute inset-0 bg-gradient-to-t ${visual.accentClass} to-acll-navy/55`}
-          aria-hidden="true"
-        />
+        <div className={`absolute inset-0 ${CMS_PREVIEW_OVERLAY}`} aria-hidden="true" />
         <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-acll-navy/70">
           {EDITOR_LABELS[collection.editor]}
         </span>

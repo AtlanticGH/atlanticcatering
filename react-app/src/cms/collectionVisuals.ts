@@ -1,16 +1,17 @@
 import type { CmsCollectionId } from '@/cms/collections'
 
-export const COLLECTION_VISUALS: Record<
-  CmsCollectionId,
-  { previewImage: string; accentClass: string }
-> = {
-  news: { previewImage: 'images/DSC04606.jpg', accentClass: 'from-acll-green/80' },
-  stats: { previewImage: 'images/DSC04603.jpg', accentClass: 'from-acll-orange/80' },
-  people: { previewImage: 'images/DSC04601.jpg', accentClass: 'from-acll-navy/80' },
-  services: { previewImage: 'images/DSC04606.jpg', accentClass: 'from-acll-green/70' },
-  clients: { previewImage: 'images/clients/tullow.png', accentClass: 'from-acll-navy/75' },
-  contact: { previewImage: 'images/DSC04664.jpg', accentClass: 'from-acll-green/75' },
-  'page-meta': { previewImage: 'images/DSC04813.jpg', accentClass: 'from-acll-navy/70' },
-  home: { previewImage: 'images/DSC04603.jpg', accentClass: 'from-acll-green/80' },
-  sustainability: { previewImage: 'images/DSC04610.jpg', accentClass: 'from-acll-orange/80' },
+/** Dark navy overlay — matches people/service card styling */
+export const CMS_PREVIEW_OVERLAY =
+  'bg-gradient-to-t from-acll-navy/90 via-acll-navy/25 to-transparent'
+
+export const COLLECTION_VISUALS: Record<CmsCollectionId, { previewImage: string }> = {
+  news: { previewImage: 'images/DSC04606.jpg' },
+  stats: { previewImage: 'images/DSC04603.jpg' },
+  people: { previewImage: 'images/DSC04601.jpg' },
+  services: { previewImage: 'images/DSC04606.jpg' },
+  clients: { previewImage: 'images/clients/tullow.png' },
+  contact: { previewImage: 'images/DSC04664.jpg' },
+  'page-meta': { previewImage: 'images/DSC04813.jpg' },
+  home: { previewImage: 'images/DSC04603.jpg' },
+  sustainability: { previewImage: 'images/DSC04610.jpg' },
 }

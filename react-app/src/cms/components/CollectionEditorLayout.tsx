@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { CmsCollectionMeta } from '@/cms/collections'
-import { COLLECTION_VISUALS } from '@/cms/collectionVisuals'
+import { CMS_PREVIEW_OVERLAY, COLLECTION_VISUALS } from '@/cms/collectionVisuals'
 import { resolveAssetPath } from '@/lib/content/resolveAssets'
 
 export function CollectionEditorLayout({
@@ -30,10 +30,7 @@ export function CollectionEditorLayout({
           alt=""
           className="h-full w-full object-cover"
         />
-        <div
-          className={`absolute inset-0 bg-gradient-to-r ${visual.accentClass} to-acll-navy/70`}
-          aria-hidden="true"
-        />
+        <div className={`absolute inset-0 ${CMS_PREVIEW_OVERLAY}`} aria-hidden="true" />
         <div className="absolute inset-0 flex flex-col justify-end px-5 py-5 sm:px-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-acll-green/90">
             {collection.id}

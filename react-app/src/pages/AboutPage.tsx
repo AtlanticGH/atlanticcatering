@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { PageHero } from '@/components/PageHero'
 import { FadeIn } from '@/components/FadeIn'
 import { PeopleCard } from '@/components/PeopleCard'
+import { PeopleFeaturedCard } from '@/components/PeopleFeaturedCard'
 import { ProfileModal } from '@/components/ProfileModal'
 import { useContent } from '@/hooks/useSiteContent'
 import type { Person } from '@/data/people'
@@ -56,6 +57,8 @@ const workforceStats = [
   { target: 30, label: 'Logistics experts' },
 ] as const
 
+const CEO_ROLE = 'Chief Executive Officer'
+
 function WorkforceStat({ target, label }: { target: number; label: string }) {
   return (
     <FadeIn className="text-center">
@@ -73,6 +76,8 @@ function WorkforceStat({ target, label }: { target: number; label: string }) {
 export function AboutPage() {
   const { people } = useContent()
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null)
+  const ceo = people.find((person) => person.role === CEO_ROLE)
+  const leadershipTeam = people.filter((person) => person.role !== CEO_ROLE)
 
   useAnimatedCounter('.workforce-stat')
 
@@ -113,11 +118,34 @@ export function AboutPage() {
         </div>
       </section>
 
+      {ceo && (
+        <section id="chief-executive" className="leadership-ceo-section py-16 lg:py-24 overflow-hidden">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8">
+            <FadeIn>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-acll-green block text-center">
+                Leadership
+              </span>
+            </FadeIn>
+            <FadeIn>
+              <h2 className="text-2xl sm:text-3xl font-bold text-acll-navy tracking-tight mt-1 mb-3 text-center">
+                Chief Executive Officer
+              </h2>
+            </FadeIn>
+            <FadeIn>
+              <p className="text-acll-navy/70 text-[15px] text-center max-w-xl mx-auto mb-12">
+                Leading Atlantic with vision, local capacity and a commitment to excellence across every operation.
+              </p>
+            </FadeIn>
+            <PeopleFeaturedCard person={ceo} onSelect={setSelectedPerson} />
+          </div>
+        </section>
+      )}
+
       <section id="our-people" className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <FadeIn>
             <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-acll-green block text-center">
-              Leadership
+              Leadership team
             </span>
           </FadeIn>
           <FadeIn>
@@ -131,7 +159,7 @@ export function AboutPage() {
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {people.map((person) => (
+            {leadershipTeam.map((person) => (
               <PeopleCard key={person.name} person={person} onSelect={setSelectedPerson} />
             ))}
           </div>

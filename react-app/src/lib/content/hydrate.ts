@@ -1,10 +1,9 @@
 import { resolveAssetPath } from '@/lib/content/resolveAssets'
 import type {
   ClientLogo,
-  HomeService,
   NewsArticle,
   Person,
-  ServicePageItem,
+  ServiceItem,
   SiteContent,
   SustainabilityPageData,
 } from '@/lib/content/types'
@@ -24,14 +23,7 @@ export function hydratePeople(people: Person[]): Person[] {
   }))
 }
 
-export function hydrateServicesPage(services: ServicePageItem[]): ServicePageItem[] {
-  return services.map((service) => ({
-    ...service,
-    image: resolveAssetPath(service.image),
-  }))
-}
-
-export function hydrateHomeServices(services: HomeService[]): HomeService[] {
+export function hydrateServices(services: ServiceItem[]): ServiceItem[] {
   return services.map((service) => ({
     ...service,
     image: resolveAssetPath(service.image),
@@ -67,8 +59,7 @@ export function hydrateSiteContent(raw: SiteContent): SiteContent {
     ...raw,
     news: hydrateNews(raw.news),
     people: hydratePeople(raw.people),
-    servicesPage: hydrateServicesPage(raw.servicesPage),
-    homeServices: hydrateHomeServices(raw.homeServices),
+    services: hydrateServices(raw.services),
     clients: hydrateClients(raw.clients),
     sustainability: hydrateSustainability(raw.sustainability),
   }

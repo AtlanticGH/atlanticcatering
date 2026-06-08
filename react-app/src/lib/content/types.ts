@@ -30,7 +30,7 @@ export type Person = {
   image: string
 }
 
-export type ServicePageItem = {
+export type ServiceItem = {
   id: string
   name: string
   tagline: string
@@ -38,13 +38,11 @@ export type ServicePageItem = {
   image: string
 }
 
-export interface HomeService {
-  id: string
-  title: string
-  description: string
-  image: string
-  linkAnchor: string
-}
+/** @deprecated Use ServiceItem */
+export type ServicePageItem = ServiceItem
+
+/** @deprecated Use ServiceItem */
+export type HomeService = ServiceItem
 
 export interface ClientLogo {
   src: string
@@ -205,8 +203,7 @@ export interface SiteContent {
   news: NewsArticle[]
   stats: StatItem[]
   people: Person[]
-  servicesPage: ServicePageItem[]
-  homeServices: HomeService[]
+  services: ServiceItem[]
   clients: { row1: ClientLogo[]; row2: ClientLogo[] }
   contact: ContactContent
   pageMeta: PageMetaMap

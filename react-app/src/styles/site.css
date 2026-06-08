@@ -432,6 +432,25 @@ section.bg-acll-navy h6 {
   }
 }
 
+/* About page: CEO featured leadership – matches workforce / contact gradient sections */
+.leadership-ceo-section {
+  background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
+  border-top: 1px solid rgba(11, 28, 45, 0.06);
+  border-bottom: 1px solid rgba(11, 28, 45, 0.06);
+}
+
+.people-featured-card-image-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.35s ease;
+}
+
+.people-featured-card:hover .people-featured-card-image-bg {
+  transform: scale(1.03);
+}
+
 /* About page: Our people, our future (workforce stats) – light background to differentiate from navy footer */
 .our-people-future-section {
   background: linear-gradient(135deg, #e8f2e8 0%, #EAEAEA 50%, #e0ede0 100%);
@@ -1002,6 +1021,9 @@ footer.bg-acll-navy {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .people-featured-card:hover .people-featured-card-image-bg {
+    transform: none;
+  }
   .people-card:hover .people-card-image-bg {
     transform: none;
   }

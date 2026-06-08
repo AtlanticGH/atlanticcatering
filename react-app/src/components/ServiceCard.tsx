@@ -1,11 +1,11 @@
 import type { KeyboardEvent } from 'react'
-import type { ServicePageItem } from '@/data/servicesPage'
+import type { ServiceItem } from '@/lib/content/types'
 import { FadeIn } from '@/components/FadeIn'
 import { assetUrl } from '@/utils/assets'
 
 type ServiceCardProps = {
-  service: ServicePageItem
-  onSelect: (service: ServicePageItem) => void
+  service: ServiceItem
+  onSelect: (service: ServiceItem) => void
 }
 
 export function ServiceCard({ service, onSelect }: ServiceCardProps) {

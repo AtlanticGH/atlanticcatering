@@ -3,8 +3,7 @@ import { join } from 'node:path'
 import { newsArticles } from '../src/data/news.ts'
 import { stats } from '../src/data/stats.ts'
 import { people } from '../src/data/people.ts'
-import { servicesPage } from '../src/data/servicesPage.ts'
-import { homeServices } from '../src/data/services.ts'
+import servicesJson from '../content/services.json' with { type: 'json' }
 import { clientRow1, clientRow2 } from '../src/data/clients.ts'
 import pageMetaJson from '../content/page-meta.json' with { type: 'json' }
 import { sustainabilityPageData } from '../src/data/sustainability.ts'
@@ -39,11 +38,7 @@ const files: Record<string, unknown> = {
   })),
   'stats.json': stats,
   'people.json': people,
-  'services-page.json': servicesPage,
-  'home-services.json': homeServices.map((service) => ({
-    ...service,
-    image: stripAsset(service.image),
-  })),
+  'services.json': servicesJson,
   'clients.json': {
     row1: clientRow1.map((client) => ({ ...client, src: stripAsset(client.src) })),
     row2: clientRow2.map((client) => ({ ...client, src: stripAsset(client.src) })),

@@ -109,73 +109,6 @@ insert into public.site_content (id, data) values ('contact', '{
 }'::jsonb)
 on conflict (id) do update set data = excluded.data, updated_at = now();
 
-insert into public.site_content (id, data) values ('home-services', '[
-  {
-    "id": "offshore",
-    "title": "Offshore Catering & Supply",
-    "description": "Full catering and supply chain for offshore operations.",
-    "image": "images/DSC04606.jpg",
-    "linkAnchor": "#offshore"
-  },
-  {
-    "id": "camp",
-    "title": "Camp Management",
-    "description": "End-to-end camp operations including 360° support.",
-    "image": "images/DSC04601.jpg",
-    "linkAnchor": "#camp"
-  },
-  {
-    "id": "inflight",
-    "title": "Inflight Catering",
-    "description": "Premium inflight meals and logistics for aviation.",
-    "image": "images/DSC04603.jpg",
-    "linkAnchor": "#inflight"
-  },
-  {
-    "id": "vip",
-    "title": "VIP Catering",
-    "description": "Bespoke catering for high-profile clients.",
-    "image": "images/DSC04610.jpg",
-    "linkAnchor": "#vip"
-  },
-  {
-    "id": "events",
-    "title": "Event Planning",
-    "description": "Corporate events, conferences and celebrations.",
-    "image": "images/DSC04664.jpg",
-    "linkAnchor": "#events"
-  },
-  {
-    "id": "chandelling",
-    "title": "Ship Chandelling",
-    "description": "Maritime supply and provisioning.",
-    "image": "images/DSC04801.jpg",
-    "linkAnchor": "#chandelling"
-  },
-  {
-    "id": "support",
-    "title": "24/7 Support",
-    "description": "Round-the-clock operational support.",
-    "image": "images/DSC04813.jpg",
-    "linkAnchor": "#support"
-  },
-  {
-    "id": "school",
-    "title": "School Catering",
-    "description": "Nutrition and catering for education.",
-    "image": "images/DSC04816.jpg",
-    "linkAnchor": "#school"
-  },
-  {
-    "id": "hospital",
-    "title": "Hospital Catering",
-    "description": "Healthcare and hospital food services.",
-    "image": "images/DSC04967.jpg",
-    "linkAnchor": "#hospital"
-  }
-]'::jsonb)
-on conflict (id) do update set data = excluded.data, updated_at = now();
-
 insert into public.site_content (id, data) values ('home', '{
   "hero": {
     "titleLine1": "Focus on your core business.",
@@ -379,7 +312,7 @@ insert into public.site_content (id, data) values ('people', '[
 ]'::jsonb)
 on conflict (id) do update set data = excluded.data, updated_at = now();
 
-insert into public.site_content (id, data) values ('services-page', '[
+insert into public.site_content (id, data) values ('services', '[
   {
     "id": "offshore",
     "name": "Offshore Catering & Supply",

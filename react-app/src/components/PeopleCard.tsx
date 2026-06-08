@@ -33,11 +33,14 @@ export function PeopleCard({ person, onSelect }: PeopleCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-acll-navy/90 via-acll-navy/25 to-transparent" />
         <div className="absolute inset-0 flex items-end p-6 lg:p-8">
-          <div>
-            <h3 className="text-white font-semibold text-[17px] lg:text-[18px] tracking-tight">
+          <div className="leading-tight">
+            <h3 className="text-white font-semibold text-[17px] lg:text-[18px] tracking-tight leading-tight">
               {person.name}
             </h3>
-            <p className="text-white/80 text-[14px] lg:text-[15px] mt-1">{person.role}</p>
+            <p className="text-white/80 text-[14px] lg:text-[15px] mt-0.5 leading-snug">{person.role}</p>
+            <span className="inline-block text-acll-green text-[13px] font-medium mt-1.5 leading-none group-hover:underline">
+              View profile →
+            </span>
           </div>
         </div>
       </div>

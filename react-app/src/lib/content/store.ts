@@ -2,15 +2,14 @@ import type { CmsCollectionId } from '@/cms/collections'
 import { CMS_COLLECTIONS } from '@/cms/collections'
 import { loadFallbackContent } from '@/lib/content/fallback'
 import { hydrateSiteContent } from '@/lib/content/hydrate'
-import type { SiteContent } from '@/lib/content/types'
+import type { ServiceItem, SiteContent } from '@/lib/content/types'
 import { getSupabase } from '@/lib/supabase/client'
 
 const COLLECTION_KEY_MAP: Record<CmsCollectionId, keyof SiteContent> = {
   news: 'news',
   stats: 'stats',
   people: 'people',
-  'services-page': 'servicesPage',
-  'home-services': 'homeServices',
+  services: 'services',
   clients: 'clients',
   contact: 'contact',
   'page-meta': 'pageMeta',
@@ -18,17 +17,34 @@ const COLLECTION_KEY_MAP: Record<CmsCollectionId, keyof SiteContent> = {
   sustainability: 'sustainability',
 }
 
+function resolveServicesFromRows(
+  rows: { id: string; data: unknown }[],
+  fallback: ServiceItem[],
+): ServiceItem[] {
+  const unified = rows.find((row) => row.id === 'services')?.data
+  if (unified) return unified as ServiceItem[]
+
+  const legacyPage = rows.find((row) => row.id === 'services-page')?.data
+  if (legacyPage) return legacyPage as ServiceItem[]
+
+  return fallback
+}
+
 function rowsToSiteContent(rows: { id: string; data: unknown }[]): SiteContent | null {
   const fallback = loadFallbackContent()
   const content = { ...fallback }
 
   for (const row of rows) {
+    if (row.id === 'services' || row.id === 'services-page' || row.id === 'home-services') {
+      continue
+    }
     const key = COLLECTION_KEY_MAP[row.id as CmsCollectionId]
     if (key) {
       ;(content as Record<string, unknown>)[key] = row.data
     }
   }
 
+  content.services = resolveServicesFromRows(rows, fallback.services)
   return content
 }
 
@@ -51,10 +67,10 @@ export async function fetchSiteContent(): Promise<SiteContent> {
 
 export async function fetchCollectionRaw(id: CmsCollectionId): Promise<unknown> {
   const supabase = getSupabase()
+  const fallback = loadFallbackContent()
+
   if (!supabase) {
-    const fallback = loadFallbackContent()
-    const key = COLLECTION_KEY_MAP[id]
-    return fallback[key]
+    return fallback[COLLECTION_KEY_MAP[id]]
   }
 
   const { data, error } = await supabase.from('site_content').select('data').eq('id', id).maybeSingle()
@@ -62,9 +78,16 @@ export async function fetchCollectionRaw(id: CmsCollectionId): Promise<unknown> 
   if (error) throw new Error(error.message)
   if (data?.data) return data.data
 
-  const fallback = loadFallbackContent()
-  const key = COLLECTION_KEY_MAP[id]
-  return fallback[key]
+  if (id === 'services') {
+    const { data: legacy } = await supabase
+      .from('site_content')
+      .select('data')
+      .eq('id', 'services-page')
+      .maybeSingle()
+    if (legacy?.data) return legacy.data
+  }
+
+  return fallback[COLLECTION_KEY_MAP[id]]
 }
 
 export async function saveCollection(id: CmsCollectionId, value: unknown): Promise<void> {

@@ -2,21 +2,19 @@ import type { CmsCollectionId } from '@/cms/collections'
 import { ClientsEditor } from '@/cms/editors/ClientsEditor'
 import { ContactEditor } from '@/cms/editors/ContactEditor'
 import { HomeEditor } from '@/cms/editors/HomeEditor'
-import { HomeServicesEditor } from '@/cms/editors/HomeServicesEditor'
 import { JsonEditor } from '@/cms/editors/JsonEditor'
 import { NewsEditor } from '@/cms/editors/NewsEditor'
 import { PageMetaEditor } from '@/cms/editors/PageMetaEditor'
 import { PeopleEditor } from '@/cms/editors/PeopleEditor'
-import { ServicesPageEditor } from '@/cms/editors/ServicesPageEditor'
+import { ServicesEditor } from '@/cms/editors/ServicesEditor'
 import { StatsEditor } from '@/cms/editors/StatsEditor'
 import type {
   ContactContent,
   HomeContent,
-  HomeService,
   NewsArticle,
   PageMetaMap,
   Person,
-  ServicePageItem,
+  ServiceItem,
   StatItem,
 } from '@/lib/content/types'
 
@@ -56,18 +54,11 @@ export function CollectionFormEditor({
           onChange={onChange as EditorProps<Person[]>['onChange']}
         />
       )
-    case 'services-page':
+    case 'services':
       return (
-        <ServicesPageEditor
-          value={value as ServicePageItem[]}
-          onChange={onChange as EditorProps<ServicePageItem[]>['onChange']}
-        />
-      )
-    case 'home-services':
-      return (
-        <HomeServicesEditor
-          value={value as HomeService[]}
-          onChange={onChange as EditorProps<HomeService[]>['onChange']}
+        <ServicesEditor
+          value={value as ServiceItem[]}
+          onChange={onChange as EditorProps<ServiceItem[]>['onChange']}
         />
       )
     case 'clients':

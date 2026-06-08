@@ -1,17 +1,17 @@
 import { ListEditor } from '@/cms/components/ListEditor'
 import { Field, ImagePathInput, TextArea, TextInput } from '@/cms/components/fields'
-import type { ServicePageItem } from '@/lib/content/types'
+import type { ServiceItem } from '@/lib/content/types'
 
-function emptyService(): ServicePageItem {
+function emptyService(): ServiceItem {
   return { id: '', name: '', tagline: '', description: '', image: '' }
 }
 
-export function ServicesPageEditor({
+export function ServicesEditor({
   value,
   onChange,
 }: {
-  value: ServicePageItem[]
-  onChange: (value: ServicePageItem[]) => void
+  value: ServiceItem[]
+  onChange: (value: ServiceItem[]) => void
 }) {
   return (
     <ListEditor
@@ -31,12 +31,12 @@ export function ServicesPageEditor({
             <TextInput value={item.name} onChange={(name) => update({ ...item, name })} />
           </Field>
           <div className="sm:col-span-2">
-            <Field label="Tagline">
+            <Field label="Tagline" hint="Short line — shown on home scroll and service cards">
               <TextInput value={item.tagline} onChange={(tagline) => update({ ...item, tagline })} />
             </Field>
           </div>
           <div className="sm:col-span-2">
-            <Field label="Description">
+            <Field label="Description" hint="Full description — shown in the service detail modal">
               <TextArea
                 value={item.description}
                 onChange={(description) => update({ ...item, description })}

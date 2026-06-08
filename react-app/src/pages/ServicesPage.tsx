@@ -6,12 +6,12 @@ import { FadeIn } from '@/components/FadeIn'
 import { ServiceCard } from '@/components/ServiceCard'
 import { ServiceModal } from '@/components/ServiceModal'
 import { useContent } from '@/hooks/useSiteContent'
-import type { ServicePageItem } from '@/data/servicesPage'
+import type { ServiceItem } from '@/lib/content/types'
 
 export function ServicesPage() {
-  const { servicesPage } = useContent()
+  const { services } = useContent()
   const location = useLocation()
-  const [selectedService, setSelectedService] = useState<ServicePageItem | null>(null)
+  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null)
 
   useEffect(() => {
     if (!location.hash) return
@@ -45,7 +45,7 @@ export function ServicesPage() {
           </FadeIn>
 
           <div className="service-grid">
-            {servicesPage.map((service) => (
+            {services.map((service) => (
               <ServiceCard key={service.id} service={service} onSelect={setSelectedService} />
             ))}
           </div>

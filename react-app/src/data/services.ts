@@ -1,1 +1,1 @@
-export type { HomeService } from '@/lib/content/types'
+export type { ServiceItem, ServicePageItem } from '@/lib/content/types'

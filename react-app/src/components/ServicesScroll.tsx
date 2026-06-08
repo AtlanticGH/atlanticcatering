@@ -5,7 +5,7 @@ import { useContent } from '@/hooks/useSiteContent'
 const CARD_WIDTH = 288 + 16
 
 export function ServicesScroll() {
-  const { homeServices } = useContent()
+  const { services } = useContent()
   const scrollRef = useRef<HTMLDivElement>(null)
 
   function scrollBy(direction: 'prev' | 'next') {
@@ -57,24 +57,24 @@ export function ServicesScroll() {
           ref={scrollRef}
           className="services-suite-scroll service-scroll flex gap-4 overflow-x-auto pb-4 -mx-5 px-5 sm:-mx-8 sm:px-8"
         >
-          {homeServices.map((service) => (
+          {services.map((service) => (
             <Link
               key={service.id}
-              to={`/services${service.linkAnchor}`}
+              to={`/services#${service.id}`}
               className="service-tile flex-shrink-0 w-72 rounded-2xl overflow-hidden p-6 pt-0 bg-white border border-acll-navy/[0.08] shadow-sm hover:shadow-md hover:border-acll-green/30 transition-all duration-200 group"
             >
               <div className="service-tile-image aspect-[4/3] -mx-6 -mt-6 mb-4 rounded-t-2xl overflow-hidden bg-acll-navy/5">
                 <img
                   src={service.image}
-                  alt={service.title}
+                  alt={service.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
               </div>
               <h3 className="font-semibold text-base text-acll-navy mb-2 group-hover:text-acll-green transition-colors">
-                {service.title}
+                {service.name}
               </h3>
-              <p className="text-sm text-acll-muted mb-4 leading-relaxed">{service.description}</p>
+              <p className="text-sm text-acll-muted mb-4 leading-relaxed">{service.tagline}</p>
               <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-acll-green group-hover:gap-2 transition-all">
                 Learn more <span aria-hidden="true">→</span>
               </span>

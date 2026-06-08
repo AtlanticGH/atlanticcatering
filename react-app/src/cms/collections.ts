@@ -2,8 +2,7 @@ export type CmsCollectionId =
   | 'news'
   | 'stats'
   | 'people'
-  | 'services-page'
-  | 'home-services'
+  | 'services'
   | 'clients'
   | 'contact'
   | 'page-meta'
@@ -41,13 +40,6 @@ const ALL_COLLECTIONS: CmsCollectionMeta[] = [
     editor: 'list',
   },
   {
-    id: 'home-services',
-    label: 'Services scroll',
-    description: 'Horizontal service tiles on the home page.',
-    file: 'home-services.json',
-    editor: 'list',
-  },
-  {
     id: 'clients',
     label: 'Client logos',
     description: 'Client logo marquee rows on the home page.',
@@ -62,10 +54,10 @@ const ALL_COLLECTIONS: CmsCollectionMeta[] = [
     editor: 'list',
   },
   {
-    id: 'services-page',
-    label: 'Services grid',
-    description: 'Full services listing and detail modals on the Services page.',
-    file: 'services-page.json',
+    id: 'services',
+    label: 'Services',
+    description: 'All services — used on the Services page grid and home page scroll.',
+    file: 'services.json',
     editor: 'list',
   },
   {
@@ -108,7 +100,7 @@ export const CMS_PAGE_SECTIONS: CmsPageSection[] = [
     id: 'home',
     label: 'Home',
     path: '/',
-    collectionIds: ['home', 'stats', 'home-services', 'clients'],
+    collectionIds: ['home', 'stats', 'clients'],
   },
   {
     id: 'about',
@@ -120,7 +112,7 @@ export const CMS_PAGE_SECTIONS: CmsPageSection[] = [
     id: 'services',
     label: 'Services',
     path: '/services',
-    collectionIds: ['services-page'],
+    collectionIds: ['services'],
   },
   {
     id: 'sustainability',

@@ -3,6 +3,10 @@
   "installCommand": "cd react-app && npm install",
   "buildCommand": "cd react-app && npm run build",
   "outputDirectory": "react-app/dist",
+  "env": {
+    "VITE_SUPABASE_URL": "https://wnkmjyulvsbcyzdykhny.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indua21qeXVsdnNiY3l6ZHlraG55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MTYwMDMsImV4cCI6MjA5NjQ5MjAwM30.wtxrG8bXKULPr58oj8BpVBis9LBBbHIfWgBb4d5i1zY"
+  },
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/about.html", "destination": "/about", "permanent": true },

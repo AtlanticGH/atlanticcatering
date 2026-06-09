@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { ContentContext } from '@/context/content-context'
 import { fetchSiteContent } from '@/lib/content/store'
 
@@ -7,7 +7,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  async function refresh() {
+  const refresh = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
@@ -18,7 +18,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -42,9 +42,20 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'visible') {
+        void refresh()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [refresh])
+
   const value = useMemo(
     () => ({ content, loading, error, refresh }),
-    [content, loading, error],
+    [content, loading, error, refresh],
   )
 
   if (loading && !content) {

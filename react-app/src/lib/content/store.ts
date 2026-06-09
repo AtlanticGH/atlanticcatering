@@ -17,6 +17,8 @@ const COLLECTION_KEY_MAP: Record<CmsCollectionId, keyof SiteContent> = {
   sustainability: 'sustainability',
 }
 
+const SERVICE_ROW_IDS = new Set(['services', 'services-page', 'home-services'])
+
 function resolveServicesFromRows(
   rows: { id: string; data: unknown }[],
   fallback: ServiceItem[],
@@ -30,14 +32,12 @@ function resolveServicesFromRows(
   return fallback
 }
 
-function rowsToSiteContent(rows: { id: string; data: unknown }[]): SiteContent | null {
+function rowsToSiteContent(rows: { id: string; data: unknown }[]): SiteContent {
   const fallback = loadFallbackContent()
-  const content = { ...fallback }
+  const content: Partial<SiteContent> = {}
 
   for (const row of rows) {
-    if (row.id === 'services' || row.id === 'services-page' || row.id === 'home-services') {
-      continue
-    }
+    if (SERVICE_ROW_IDS.has(row.id)) continue
     const key = COLLECTION_KEY_MAP[row.id as CmsCollectionId]
     if (key) {
       ;(content as Record<string, unknown>)[key] = row.data
@@ -45,24 +45,34 @@ function rowsToSiteContent(rows: { id: string; data: unknown }[]): SiteContent |
   }
 
   content.services = resolveServicesFromRows(rows, fallback.services)
-  return content
+
+  return {
+    ...fallback,
+    ...content,
+    services: content.services ?? fallback.services,
+  }
 }
 
 export async function fetchSiteContent(): Promise<SiteContent> {
   const supabase = getSupabase()
   if (!supabase) {
+    console.warn('[content] Supabase not configured — using bundled fallback JSON.')
     return hydrateSiteContent(loadFallbackContent())
   }
 
   const { data, error } = await supabase.from('site_content').select('id, data')
 
-  if (error || !data?.length) {
-    console.warn('Supabase content fetch failed, using local fallback.', error?.message)
+  if (error) {
+    console.warn('[content] Supabase fetch failed — using bundled fallback JSON.', error.message)
     return hydrateSiteContent(loadFallbackContent())
   }
 
-  const merged = rowsToSiteContent(data)
-  return hydrateSiteContent(merged ?? loadFallbackContent())
+  if (!data?.length) {
+    console.warn('[content] Supabase returned no rows — using bundled fallback JSON.')
+    return hydrateSiteContent(loadFallbackContent())
+  }
+
+  return hydrateSiteContent(rowsToSiteContent(data))
 }
 
 export async function fetchCollectionRaw(id: CmsCollectionId): Promise<unknown> {
@@ -104,11 +114,14 @@ export async function saveCollection(id: CmsCollectionId, value: unknown): Promi
     throw new Error('You must be signed in to save content.')
   }
 
-  const { error } = await supabase.from('site_content').upsert({
-    id,
-    data: value,
-    updated_at: new Date().toISOString(),
-  })
+  const { error } = await supabase.from('site_content').upsert(
+    {
+      id,
+      data: value,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: 'id' },
+  )
 
   if (error) throw new Error(error.message)
 }

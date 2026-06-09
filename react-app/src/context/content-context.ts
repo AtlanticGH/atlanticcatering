@@ -5,7 +5,7 @@ export type ContentState = {
   content: SiteContent | null
   loading: boolean
   error: string | null
-  refresh: () => Promise<void>
+  refresh: (options?: { silent?: boolean }) => Promise<void>
 }
 
 export const ContentContext = createContext<ContentState | null>(null)

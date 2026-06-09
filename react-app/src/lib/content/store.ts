@@ -3,6 +3,7 @@ import { CMS_COLLECTIONS } from '@/cms/collections'
 import { loadFallbackContent } from '@/lib/content/fallback'
 import { hydrateSiteContent } from '@/lib/content/hydrate'
 import type { ServiceItem, SiteContent } from '@/lib/content/types'
+import { notifyContentUpdated } from '@/lib/content/sync'
 import { getSupabase } from '@/lib/supabase/client'
 
 const COLLECTION_KEY_MAP: Record<CmsCollectionId, keyof SiteContent> = {
@@ -60,7 +61,10 @@ export async function fetchSiteContent(): Promise<SiteContent> {
     return hydrateSiteContent(loadFallbackContent())
   }
 
-  const { data, error } = await supabase.from('site_content').select('id, data')
+  const { data, error } = await supabase
+    .from('site_content')
+    .select('id, data, updated_at')
+    .order('id')
 
   if (error) {
     console.warn('[content] Supabase fetch failed — using bundled fallback JSON.', error.message)
@@ -124,6 +128,8 @@ export async function saveCollection(id: CmsCollectionId, value: unknown): Promi
   )
 
   if (error) throw new Error(error.message)
+
+  notifyContentUpdated(id)
 }
 
 export function getAllCollectionIds(): CmsCollectionId[] {

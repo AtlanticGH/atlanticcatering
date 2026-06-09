@@ -64,12 +64,12 @@ export function AdminShell() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <Link
-                to="/"
+              <a
+                href="/"
                 className="text-[13px] font-medium text-white/70 hover:text-acll-green transition-colors"
               >
                 View site
-              </Link>
+              </a>
               <button
                 type="button"
                 onClick={handleLogout}
@@ -97,9 +97,9 @@ export function AdminShell() {
       <footer className="shrink-0 bg-white border-t border-acll-navy/[0.06] py-5">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-3 text-[13px] text-acll-muted">
           <p>Atlantic Catering &amp; Logistics Limited</p>
-          <Link to="/" className="font-medium text-acll-navy hover:text-acll-green transition-colors">
+          <a href="/" className="font-medium text-acll-navy hover:text-acll-green transition-colors">
             ← Back to website
-          </Link>
+          </a>
         </div>
       </footer>
     </div>

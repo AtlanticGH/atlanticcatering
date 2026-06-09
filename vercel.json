@@ -24,5 +24,19 @@
       "source": "/((?!api/|assets/|favicon\\.svg|icons\\.svg).*)",
       "destination": "/index.html"
     }
+  ],
+  "headers": [
+    {
+      "source": "/index.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, must-revalidate" }
+      ]
+    }
   ]
 }

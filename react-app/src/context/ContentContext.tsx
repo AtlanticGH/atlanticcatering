@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { ContentContext } from '@/context/content-context'
 import { fetchSiteContent } from '@/lib/content/store'
+import { subscribeToContentUpdates } from '@/lib/content/sync'
 
 export function ContentProvider({ children }: { children: ReactNode }) {
   const [content, setContent] = useState(null as import('@/lib/content/types').SiteContent | null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const refresh = useCallback(async () => {
-    setLoading(true)
+  const refresh = useCallback(async (options?: { silent?: boolean }) => {
+    if (!options?.silent) setLoading(true)
     setError(null)
     try {
       const next = await fetchSiteContent()
@@ -16,7 +17,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load content')
     } finally {
-      setLoading(false)
+      if (!options?.silent) setLoading(false)
     }
   }, [])
 
@@ -43,14 +44,30 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    return subscribeToContentUpdates(() => {
+      void refresh({ silent: true })
+    })
+  }, [refresh])
+
+  useEffect(() => {
     function handleVisibilityChange() {
       if (document.visibilityState === 'visible') {
-        void refresh()
+        void refresh({ silent: true })
+      }
+    }
+
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        void refresh({ silent: true })
       }
     }
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('pageshow', handlePageShow)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('pageshow', handlePageShow)
+    }
   }, [refresh])
 
   const value = useMemo(
